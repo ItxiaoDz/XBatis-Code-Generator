@@ -277,8 +277,11 @@ public class GenTable {
                     }
                 }
             }
+            if (pkfieldNameSet.size()>1) 
+            	tableBean.setIsMultiPk(true);
             /**主键提前**/
             tableBean.getColList().removeAll(tableBean.getPkcol());
+            tableBean.getColListWithoutPk().addAll(tableBean.getColList());
             tableBean.getColList().addAll(0,tableBean.getPkcol());
 		} catch (SQLException e) {
 			logger.error("获取所有指定表的字段出错", e);

@@ -37,6 +37,19 @@ public class TableBean {
 		this.objectName = getObjectName(this.className);
 	}
 
+    /**
+     * 是否为符合主见表
+     */
+    private Boolean isMultiPk = false;
+    
+    public Boolean getIsMultiPk() {
+		return isMultiPk;
+	}
+
+	public void setIsMultiPk(Boolean isMultiPk) {
+		this.isMultiPk = isMultiPk;
+	}
+	
 	/** ================根据表结构生成表对象及字段信息====================== */
 	/** 类名 */
 	private String className;
@@ -47,6 +60,11 @@ public class TableBean {
 	private List<ColBean> pkcol = new ArrayList<ColBean>();
 	/** 字段列表 */
 	private List<ColBean> colList = new ArrayList<ColBean>();
+	
+	/**
+	 * 去除掉主键的字段列表
+	 */
+	private List<ColBean> colListWithoutPk = new ArrayList<ColBean>();
 
 	private Map<String, ColBean> colMap = new LinkedHashMap<String, ColBean>();
 
@@ -161,4 +179,13 @@ public class TableBean {
     public String getPureTableName() {
         return tableName.replace("_$tableId$", "");
     }
+
+	public List<ColBean> getColListWithoutPk() {
+		return colListWithoutPk;
+	}
+
+	public void setColListWithoutPk(List<ColBean> colListWithoutPk) {
+		this.colListWithoutPk = colListWithoutPk;
+	}
+
 }

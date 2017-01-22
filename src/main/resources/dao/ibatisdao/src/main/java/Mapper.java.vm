@@ -1,0 +1,27 @@
+##Mapper基础接口
+##使用到的变量有：
+##$!{gb.packageName}包名，如：net.letuu.order
+##$!{gb.userName}机器登录用户名，如：microboss
+##$!{gb.nowDate}当前日期，如：2013-05-02
+##$!{tbb.className}类名，如：UserInfo
+##$!{tbb.objectName}对象名，如：userInfo
+
+package $!{gb.packageName}.mapper;
+
+import $!{gb.packageName}.query.$!{tbb.className}Query;
+import $!{gb.packageName}.pojo.$!{tbb.className};
+#if($!{tbb.isMultiPk})
+import $!{gb.packageName}.pojo.$!{tbb.className}Key;
+#end
+
+/**
+ * <br>类描述:
+ * <br>功能详细描述:
+ *
+ * @author $!{gb.userName}
+ */
+ 
+ public interface $!{tbb.className}Mapper extends STBaseMapper<$!{tbb.className}, $!{tbb.className}Query,#if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end>{
+
+}
+

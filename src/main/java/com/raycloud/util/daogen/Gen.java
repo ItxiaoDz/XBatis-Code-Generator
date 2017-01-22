@@ -41,6 +41,7 @@ public class Gen {
      */
     static {
         tconfig.put("t_byzw_user", TableConfig.build("t_byzw_user").setTablePrefix("t_"));
+        tconfig.put("t_user", TableConfig.build("t_user").setTablePrefix("t_"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })
@@ -195,6 +196,9 @@ public class Gen {
                 if (vmFilename.startsWith("Result")) {
                     this.doSpecialVM(ctx, vmFilename, javaVmDir, javaDir);
                     continue;
+                }
+                if (vmFilename.startsWith("Key")&&!tableBean.getIsMultiPk()) { // 如果不是复合主键的表，不需要生成主键对象
+                	continue;
                 }
                 createFilename = FileUtil.getFilenameWithoutExt(vmFilename);
                 if (createFilename.startsWith("DO.")) {

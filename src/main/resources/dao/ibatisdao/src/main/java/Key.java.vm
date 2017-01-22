@@ -40,39 +40,17 @@ import lombok.Data;
  * @date  [$!{gb.nowDate}]
  */
  @Data
-public class $!{tbb.className}${PO} #if($!{tbb.isMultiPk})extends $!{tbb.className}Key #end implements Serializable{
+public class $!{tbb.className}Key implements Serializable{
 
     /**
 	 *序列化ID
 	 */
 	private static final long serialVersionUID = 1L;
 
-#if(!$!{tbb.isMultiPk})
 #foreach($cb in $tbb.pkcol)
 	/**
      * $!{cb.colComment}
      */
     private $!{cb.propertyType} $!{cb.propertyName};
-#end 
-#end
-
-#foreach($cb in $tbb.colListWithoutPk)
-	/**
-     * $!{cb.colComment}
-     */
-    private $!{cb.propertyType} $!{cb.propertyName};
-#end
-
-#if($conf.isUpdateObj())
-	/**
-     * 需要更新时的代码，keys 代表主键list
-     */
-	private List<Long> keys;
-#end
-#if($conf.isSplitTable())
-    /**
-    * 分表使用
-    */
-    private String tableId;
 #end
 }
