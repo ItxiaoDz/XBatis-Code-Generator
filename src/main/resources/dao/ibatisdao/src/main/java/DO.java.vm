@@ -32,12 +32,14 @@ import java.math.BigDecimal;
 #end
 #end
 import java.io.Serializable;
-
+import lombok.Data;
 /**
- *
+ * <br>类描述:
+ * <br>功能详细描述:
  * @author  $!{gb.userName}
- * @date    $!{gb.nowDate}
+ * @date  [$!{gb.nowDate}]
  */
+ @Data
 public class $!{tbb.className}${PO} implements Serializable{
 
     /**
@@ -52,48 +54,16 @@ public class $!{tbb.className}${PO} implements Serializable{
     private $!{cb.propertyType} $!{cb.propertyName};
 #end
 
-#foreach($cb in $tbb.colList)
-	
-   /**
-    * @return $!{cb.propertyName} $!{cb.colComment}
-    */
-    public $!{cb.propertyType} get$!{cb.methodName}() {
-       return $!{cb.propertyName};
-    }
-   /**
-    * @param $!{cb.propertyName} $!{cb.colComment}
-    */
-    public void set$!{cb.methodName}($!{cb.propertyType} $!{cb.propertyName}) {
-       this.$!{cb.propertyName} = $!{cb.propertyName};
-    }
-#end
-
 #if($conf.isUpdateObj())
 	/**
      * 需要更新时的代码，keys 代表主键list
      */
 	private List<Long> keys;
-		
-	public List<Long> getKeys() {
-		return keys;
-	}
-	
-	public void setIds(List<Long> keys) {
-		this.keys = keys;
-	}
 #end
 #if($conf.isSplitTable())
     /**
     * 分表使用
     */
     private String tableId;
-
-    public String getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(String tableId) {
-        this.tableId = tableId;
-    }
 #end
 }

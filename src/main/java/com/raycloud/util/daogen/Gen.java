@@ -40,15 +40,15 @@ public class Gen {
      * 对于dao的生成，暂时特殊定制，硬编码。key 为数据库表名，暂不全量配置
      */
     static {
-        tconfig.put("shop", TableConfig.build("shop"));
+        tconfig.put("t_byzw_user", TableConfig.build("t_byzw_user").setTablePrefix("t_"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
-        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
-        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })
-        //.addQueryMethodAndCol("getTradeByShopId", new String[] { "shop_id" }));;
-        tconfig.put("tb_order", TableConfig.build("tb_order"));
-        tconfig.put("tb_trade_rate", TableConfig.build("tb_trade_rate"));
-
-        tconfig.put("tb_trade_refund", TableConfig.build("tb_trade_refund"));
+//        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
+//        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })
+//        //.addQueryMethodAndCol("getTradeByShopId", new String[] { "shop_id" }));;
+//        tconfig.put("tb_order", TableConfig.build("tb_order"));
+//        tconfig.put("tb_trade_rate", TableConfig.build("tb_trade_rate"));
+//
+//        tconfig.put("tb_trade_refund", TableConfig.build("tb_trade_refund"));
 //        tconfig.put("erp_user", TableConfig.build("erp_user").setTablePrefix("erp_").addQueryMethodAndCol("getUserByVisitorId", new String[] { "visitor_id" })
 //                                                             .addQueryMethodAndCol("getUserByUserId", new String[]{"user_id"})
 //                                                             .addQueryMethodAndCol("getUserByNickName", new String[]{"name"})
@@ -126,7 +126,7 @@ public class Gen {
         Gen gen = new Gen(dbConn);
         // 设置工程的全局变量
         gen.globalBean.setNowDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd"));// 设置系统生成时间
-        gen.globalBean.setUserName("Ou zhouyou (ouzhouyou@gmail.com)");// 设置系统当前用户
+        gen.globalBean.setUserName("Chenzhixiang (itxiaoaichen@gmail.com)");// 设置系统当前用户
         gen.globalBean.setPackageName(settings.getJavaPackage());// 设置Java_Package路径
         // 生成指定数据库的指定表或所有表数据访问层代码
         String tabName;
@@ -254,7 +254,7 @@ public class Gen {
             List<String> javaVmList = FileUtil.getFileListWithExt(javaVmDir, ".vm");
             String createFilename, packageDir = "", packageStr;
             for (String vmFilename : javaVmList) {
-                if (!vmFilename.startsWith("Base"))
+                if (!vmFilename.startsWith("Base")&&!vmFilename.startsWith("STBase"))
                     continue; // 非基类代码跳过
                 createFilename = FileUtil.getFilenameWithoutExt(vmFilename);
                 packageStr = FileUtil.findLine(javaVmDir + "/" + vmFilename, "package");

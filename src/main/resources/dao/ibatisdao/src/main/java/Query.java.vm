@@ -35,7 +35,7 @@ import java.util.*;
  *
  * @author $!{gb.userName}
  */
-public class $!{tbb.className}Query extends BaseQuery {
+public class $!{tbb.className}Query extends STBaseQuery {
 
 	/**==============================批量查询、更新、删除时的Where条件设置==================================**/
 #foreach($cb in $tbb.colList)
