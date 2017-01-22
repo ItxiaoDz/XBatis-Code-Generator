@@ -190,7 +190,7 @@ public class Gen {
             List<String> javaVmList = FileUtil.getFileListWithExt(javaVmDir, ".vm");
             String createFilename, packageDir = "", packageStr;
             for (String vmFilename : javaVmList) {
-                if (vmFilename.startsWith("Base"))
+                if (vmFilename.startsWith("Base")||vmFilename.startsWith("STBase"))
                     continue; // 基类代码跳过
                 if (vmFilename.startsWith("Result")) {
                     this.doSpecialVM(ctx, vmFilename, javaVmDir, javaDir);
