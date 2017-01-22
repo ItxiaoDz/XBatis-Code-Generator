@@ -3,7 +3,7 @@
 ##$!{gb.packageName}包名，如：net.letuu.order
 ##$!{gb.userName}机器登录用户名，如：microboss
 ##$!{gb.nowDate}当前日期，如：2013-05-02
-package $!{gb.packageName}.query;
+package $!{gb.packageName}.api.domain.query;
 
 import java.io.Serializable;
 
@@ -95,5 +95,9 @@ public class STBaseQuery implements Serializable {
 		super();
 		this.page = Integer.parseInt(page);
 		this.pageSize = Integer.parseInt(pageSize);
+	}
+	
+	public STBaseQuery() {
+		super();
 	}
 }

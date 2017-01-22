@@ -13,7 +13,7 @@
 #set($conf=$!{tbb.conf})
 #set($bigDecimal=false)
 #set($Date=false)
-package $!{gb.packageName}.pojo;
+package $!{gb.packageName}.impl.model;
 
 import java.util.*;
 #foreach($cb in $tbb.colList)

@@ -13,7 +13,7 @@
 #set($conf=$!{tbb.conf})
 #set($bigDecimal=false)
 #set($Date=false)
-package $!{gb.packageName}.query;
+package $!{gb.packageName}.api.domain.query;
 
 #foreach($cb in $tbb.colList)
     #if($!{cb.propertyType}=="Clob"&&!$clob)

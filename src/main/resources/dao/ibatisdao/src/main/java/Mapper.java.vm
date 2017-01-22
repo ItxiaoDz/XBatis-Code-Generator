@@ -6,12 +6,12 @@
 ##$!{tbb.className}类名，如：UserInfo
 ##$!{tbb.objectName}对象名，如：userInfo
 
-package $!{gb.packageName}.mapper;
+package $!{gb.packageName}.impl.mapper;
 
-import $!{gb.packageName}.query.$!{tbb.className}Query;
-import $!{gb.packageName}.pojo.$!{tbb.className};
+import $!{gb.packageName}.api.domain.query.$!{tbb.className}Query;
+import $!{gb.packageName}.impl.model.$!{tbb.className};
 #if($!{tbb.isMultiPk})
-import $!{gb.packageName}.pojo.$!{tbb.className}Key;
+import $!{gb.packageName}.impl.model.$!{tbb.className}Key;
 #end
 
 /**
