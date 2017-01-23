@@ -17,8 +17,8 @@ import $!{gb.packageName}.impl.model.$!{tbb.className}Key;
 /**
  * <br>类描述:
  * <br>功能详细描述:
- *
- * @author $!{gb.userName}
+ * @author  $!{gb.userName}
+ * @date  [$!{gb.nowDate}]
  */
  
  public interface $!{tbb.className}Mapper extends STBaseMapper<$!{tbb.className}, $!{tbb.className}Query,#if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end>{

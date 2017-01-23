@@ -1,0 +1,103 @@
+##Service基础接口
+##使用到的变量有：
+##$!{gb.packageName}包名，如：net.letuu.order
+##$!{gb.userName}机器登录用户名，如：microboss
+##$!{gb.nowDate}当前日期，如：2013-05-02
+##$!{tbb.className}类名，如：UserInfo
+##$!{tbb.objectName}对象名，如：userInfo
+
+package $!{gb.packageName}.api.service;
+
+import java.util.List;
+import com.github.pagehelper.PageInfo;
+
+/**
+ * <br>类描述:Service基础接口
+ * <br>功能详细描述:
+ *
+ * @author $!{gb.userName}
+ * @param <T>实体类
+ * @param <P>查询实体
+ * @param <I>主键
+ */
+ public interface STBaseService<T,Q,P> {
+ 	/**
+	 * 保存
+	 * @param record
+	 * @return
+	 */
+	int insert(T record);
+	/**
+	 * 保存不为空选项
+	 * @param record
+	 * @return
+	 */
+	int insertSelective(T record);
+	
+	/**
+	 * 批量新增
+	 */
+	int batchUpdate(List<T> list);
+	
+	/**
+	 * 根据id删除
+	 * @param id
+	 * @return
+	 */
+	int deleteByPrimaryKey(P id);
+	/**
+	 * 根据id批量删除
+	 * @param ids
+	 * @return
+	 */
+	public Integer deleteByKeys(List<P> ids);
+	
+	/**
+	 * 根据id更新所有字段
+	 * @param record
+	 * @return
+	 */
+	int updateByPrimaryKey(T record);
+	
+	/**
+	 * 根据id更新所选项
+	 * @param record
+	 * @return
+	 */
+	int updateByPrimaryKeySelective(T record);
+	
+	/**
+	 * 批量新增
+	 * @param list
+	 * @return
+	 */
+	int batchInsert(List<T> list);
+	
+	/**
+	 * 根据id搜索
+	 * @param id
+	 * @return
+	 */
+	T selectByPrimaryKey(P id);
+	/**
+	 * 根据id批量搜索
+	 * @param ids
+	 * @return
+	 */
+	List<T> selectByKeys(List<P> ids);
+	
+	/**
+	 * 根据查询类查询内容（不分页）
+	 * @param record
+	 * @return
+	 */
+	List<T> selectList(Q params);
+	
+	/**
+	 * 根据查询类查询分页内容
+	 * @param record
+	 * @return
+	 */
+	PageInfo<T> selectListByPage(Q query);
+ } 
+

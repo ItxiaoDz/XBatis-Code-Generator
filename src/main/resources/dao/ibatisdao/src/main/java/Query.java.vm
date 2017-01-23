@@ -32,8 +32,10 @@ package $!{gb.packageName}.api.domain.query;
 #end
 import java.util.*;
 /**
- *
- * @author $!{gb.userName}
+ * <br>类描述:
+ * <br>功能详细描述:
+ * @author  $!{gb.userName}
+ * @date  [$!{gb.nowDate}]
  */
 public class $!{tbb.className}Query extends STBaseQuery {
 

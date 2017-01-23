@@ -1,0 +1,112 @@
+##Service基础实现类
+##使用到的变量有：
+##$!{gb.packageName}包名，如：net.letuu.order
+##$!{gb.userName}机器登录用户名，如：microboss
+##$!{gb.nowDate}当前日期，如：2013-05-02
+##$!{tbb.className}类名，如：UserInfo
+##$!{tbb.objectName}对象名，如：userInfo
+
+package $!{gb.packageName}.impl.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import $!{gb.packageName}.api.domain.query.STBaseQuery;
+import $!{gb.packageName}.api.service.STBaseService;
+import $!{gb.packageName}.impl.mapper.STBaseMapper;
+
+/**
+ * <br>类描述:Service基础实现类
+ * <br>功能详细描述:
+ *
+ * @author $!{gb.userName}
+ * @param <T>实体类
+ * @param <P>查询实体
+ * @param <I>主键
+ */
+ public class STBaseServiceImpl<T,Q extends STBaseQuery,P> implements STBaseService<T, Q, P>{
+	
+	@Autowired
+	protected STBaseMapper<T, Q, P> baseMapper;
+	
+	
+	public int insert(T record) {
+		return baseMapper.insert(record);
+	}
+
+
+	
+	public int insertSelective(T record) {
+		return baseMapper.insertSelective(record);
+	}
+	
+	@Override
+	public int batchInsert(List<T> list) {
+		return baseMapper.batchInsert(list);
+	}
+
+	
+	public int deleteByPrimaryKey(P id) {
+		return baseMapper.deleteByPrimaryKey(id);
+	}
+
+
+	
+	public Integer deleteByKeys(List<P> ids) {
+		return baseMapper.deleteByKeys(ids);
+	}
+
+
+	
+	@Override
+	public int updateByPrimaryKey(T record) {
+		return baseMapper.updateByPrimaryKey(record);
+	}
+	
+	
+	@Override
+	public int updateByPrimaryKeySelective(T record) {
+		return baseMapper.updateByPrimaryKeySelective(record);
+	}
+	
+	
+	@Override
+	public int batchUpdate(List<T> list){
+		return baseMapper.batchUpdate(list);
+	}
+
+
+	@Override
+	public T selectByPrimaryKey(P id) {
+		return baseMapper.selectByPrimaryKey(id);
+	}
+
+
+	@Override
+	public List<T> selectByKeys(List<P> ids) {
+		return baseMapper.selectByKeys(ids);
+	}
+
+	
+	@Override
+	public List<T> selectList(Q query) {
+		return baseMapper.selectList(query);
+	}	
+
+
+	@Override
+	public PageInfo<T> selectListByPage(Q query) {
+		if(null==query){
+			PageHelper.startPage(1,10);
+		}else{
+			PageHelper.startPage(query.getPage(), query.getRows());
+		}
+		List<T> list =  baseMapper.selectListByPage(query);
+		PageInfo<T> pageN = new PageInfo<T>(list);
+		return pageN;
+	}
+ } 
+
