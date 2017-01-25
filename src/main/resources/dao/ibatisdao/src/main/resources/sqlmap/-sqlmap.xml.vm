@@ -16,15 +16,24 @@
 #end
 #macro(allFieldAndValue $tbb )
     #foreach($pkcol in $tbb.colList)
-        ${pkcol.colNameCheck}=#${pkcol.propertyName}# #if(!$foreach.last) AND #end
+        ${pkcol.colNameCheck}=#{${pkcol.propertyName},jdbcType=$!{pkcol.jdbcType}} #if(!$foreach.last) AND #end
     #end
 #end
 #macro(pkField $tbb $str)
     #foreach($cb in $tbb.pkcol)$!{cb.colNameCheck}#if(!$foreach.last) , #end#end
 #end
+#macro(pkFieldWithParamName $tbb)
+	#if(!$tbb.isMultiPk)
+        ${$tbb.pkcol.get(0).colNameCheck}=#{pk,jdbcType=$tbb.pkcol.get(0).jdbcType}
+    #else
+    #foreach($pkcol in $tbb.pkcol)
+        ${pkcol.colNameCheck}=#{pk.${pkcol.propertyName},jdbcType=$!{pkcol.jdbcType}} #if(!$foreach.last) AND #end
+    #end
+    #end
+#end
 #macro(pklFieldAndValue $tbb)
     #foreach($pkcol in $tbb.pkcol)
-        ${pkcol.colNameCheck}=#{${pkcol.propertyName}, jdbcType=$!{pkcol.jdbcType}}# #if(!$foreach.last) AND #end
+        ${pkcol.colNameCheck}=#{${pkcol.propertyName}, jdbcType=$!{pkcol.jdbcType}} #if(!$foreach.last) AND #end
     #end
 #end
 ##批量删除与查找

@@ -22,7 +22,7 @@ import java.util.List;
 	 * @param id
 	 * @return
 	 */
-	int deleteByPrimaryKey(P id);
+	int deleteByPrimaryKey(P _pk);
 	/**
 	 * 根据id批量删除
 	 * @param ids
@@ -52,7 +52,7 @@ import java.util.List;
 	 * @param id
 	 * @return
 	 */
-	T selectByPrimaryKey(P id);
+	T selectByPrimaryKey(P _pk);
 	/**
 	 * 根据id批量搜索
 	 * @param ids
