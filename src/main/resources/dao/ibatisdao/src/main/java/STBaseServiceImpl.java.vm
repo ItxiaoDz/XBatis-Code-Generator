@@ -6,7 +6,7 @@
 ##$!{tbb.className}类名，如：UserInfo
 ##$!{tbb.objectName}对象名，如：userInfo
 
-package $!{gb.packageName}.impl.service;
+package $!{gb.rootPackageName}.core.common.api.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,9 +14,9 @@ import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import $!{gb.packageName}.api.domain.query.STBaseQuery;
-import $!{gb.packageName}.api.service.STBaseService;
-import $!{gb.packageName}.impl.mapper.STBaseMapper;
+import $!{gb.rootPackageName}.core.common.api.base.STBaseQuery;
+import $!{gb.rootPackageName}.core.common.api.base.STBaseService;
+import $!{gb.rootPackageName}.core.common.api.base.STBaseMapper;
 
 /**
  * <br>类描述:Service基础实现类

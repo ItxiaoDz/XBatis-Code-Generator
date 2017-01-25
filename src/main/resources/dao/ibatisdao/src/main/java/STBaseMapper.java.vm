@@ -6,7 +6,7 @@
 ##$!{tbb.className}类名，如：UserInfo
 ##$!{tbb.objectName}对象名，如：userInfo
 
-package $!{gb.packageName}.impl.mapper;
+package $!{gb.rootPackageName}.core.common.api.base;
 
 import java.util.List;
 

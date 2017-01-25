@@ -128,6 +128,7 @@ public class Gen {
         // 设置工程的全局变量
         gen.globalBean.setNowDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd"));// 设置系统生成时间
         gen.globalBean.setUserName("Chenzhixiang (itxiaoaichen@gmail.com)");// 设置系统当前用户
+        gen.globalBean.setRootPackageName(settings.getJavaRootPackage());
         gen.globalBean.setPackageName(settings.getJavaPackage());// 设置Java_Package路径
         // 生成指定数据库的指定表或所有表数据访问层代码
         String tabName;
@@ -263,10 +264,18 @@ public class Gen {
                 createFilename = FileUtil.getFilenameWithoutExt(vmFilename);
                 packageStr = FileUtil.findLine(javaVmDir + "/" + vmFilename, "package");
                 if (StringUtils.isNotBlank(packageStr)) {
-                    packageStr = packageStr
-                            .substring(packageStr.indexOf("$!{gb.packageName}"), packageStr.indexOf(";"));
-                    packageDir = packageStr.replace("$!{gb.packageName}", globalBean.getPackageName())
-                            .replace(".", "/");
+                	if (packageStr.indexOf("$!{gb.packageName}")>0) {
+                		packageStr = packageStr
+                                .substring(packageStr.indexOf("$!{gb.packageName}"), packageStr.indexOf(";"));
+                        packageDir = packageStr.replace("$!{gb.packageName}", globalBean.getPackageName())
+                                .replace(".", "/");
+                	} else if(packageStr.indexOf("$!{gb.rootPackageName}")>0) {
+                		packageStr = packageStr
+                                .substring(packageStr.indexOf("$!{gb.rootPackageName}"), packageStr.indexOf(";"));
+                        packageDir = packageStr.replace("$!{gb.rootPackageName}", globalBean.getRootPackageName())
+                                .replace(".", "/");
+                	}
+                    
                 }
                 FileUtil.mkDirs(javaDir + packageDir);
                 VelocityTemplate.mergeTemplate(settings.getTmplPath() + PATH_JAVA + "/" + vmFilename, javaDir

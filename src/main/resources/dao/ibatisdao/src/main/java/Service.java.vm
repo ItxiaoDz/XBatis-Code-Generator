@@ -8,6 +8,7 @@
 
 package $!{gb.packageName}.api.service;
 
+import $!{gb.rootPackageName}.core.common.api.base.STBaseService;
 import $!{gb.packageName}.impl.model.$!{tbb.className};
 import $!{gb.packageName}.api.domain.query.$!{tbb.className}Query;
 #if($!{tbb.isMultiPk})

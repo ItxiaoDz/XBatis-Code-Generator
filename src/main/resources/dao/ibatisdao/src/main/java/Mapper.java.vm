@@ -8,6 +8,7 @@
 
 package $!{gb.packageName}.impl.mapper;
 
+import $!{gb.rootPackageName}.core.common.api.base.STBaseMapper;
 import $!{gb.packageName}.api.domain.query.$!{tbb.className}Query;
 import $!{gb.packageName}.impl.model.$!{tbb.className};
 #if($!{tbb.isMultiPk})

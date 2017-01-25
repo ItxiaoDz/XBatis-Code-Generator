@@ -31,6 +31,8 @@ package $!{gb.packageName}.api.domain.query;
     #end
 #end
 import java.util.*;
+
+import $!{gb.rootPackageName}.core.common.api.base.STBaseQuery;
 /**
  * <br>类描述:
  * <br>功能详细描述:

@@ -40,6 +40,8 @@ public class Settings {
 	private String dbPwd;
 	/** DAO模版路径，如dao/ibatisdao */
 	private String tmplPath;
+	/** Java_Package根路径，对于多个子项目时有用 */
+	private String javaRootPackage;
 	/** Java_Package包路径 */
 	private String javaPackage;
 	/** 指定生成表  */
@@ -106,6 +108,7 @@ public class Settings {
 			}
 			logger.info("指定生成表：" + tables.toString());
 		}
+		javaRootPackage = (String) prop.get("JAVA_ROOT_PACKAGE");
 		javaPackage = (String) prop.get("JAVA_PACKAGE");
 		String tmpl = (String) prop.get("USE_TMPL");
 		if(StringUtils.isBlank(tmpl)){
@@ -195,6 +198,14 @@ public class Settings {
 
 	public void setTmplPath(String tmplPath) {
 		this.tmplPath = tmplPath;
+	}
+
+	public String getJavaRootPackage() {
+		return javaRootPackage;
+	}
+
+	public void setJavaRootPackage(String javaRootPackage) {
+		this.javaRootPackage = javaRootPackage;
 	}
 
 	public String getJavaPackage() {

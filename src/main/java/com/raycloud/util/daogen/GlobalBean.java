@@ -13,6 +13,9 @@ public class GlobalBean {
 	/** 当前用户，生成类用 */
 	private String userName;
 	
+	/** 工程包根路径，生成类用（多子项目时使用） */
+	private String rootPackageName;
+	
 	/** 工程包路径，生成类用 */
 	private String packageName;
 	
@@ -34,6 +37,14 @@ public class GlobalBean {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getRootPackageName() {
+		return rootPackageName;
+	}
+
+	public void setRootPackageName(String rootPackageName) {
+		this.rootPackageName = rootPackageName;
 	}
 
 	public String getPackageName() {
