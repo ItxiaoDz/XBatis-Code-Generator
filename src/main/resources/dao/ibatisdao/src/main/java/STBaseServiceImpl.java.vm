@@ -102,7 +102,7 @@ import $!{gb.packageName}.impl.mapper.STBaseMapper;
 		if(null==query){
 			PageHelper.startPage(1,10);
 		}else{
-			PageHelper.startPage(query.getPage(), query.getRows());
+			PageHelper.startPage(query.getPage(), query.getPageSize());
 		}
 		List<T> list =  baseMapper.selectListByPage(query);
 		PageInfo<T> pageN = new PageInfo<T>(list);

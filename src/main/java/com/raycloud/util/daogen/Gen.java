@@ -219,7 +219,7 @@ public class Gen {
             // 生成SqlMap配置文件
             String sqlmapVm = settings.getTmplPath() + PATH_RESOURCES + "sqlmap/-sqlmap.xml.vm";
             String sqlmapDir = settings.getGenPath() + settings.getTmplPath() + PATH_RESOURCES + "sqlmap/";
-            VelocityTemplate.mergeTemplate(sqlmapVm, sqlmapDir + tableBean.getPureTableName() + "-sqlmap.xml", ctx);
+            VelocityTemplate.mergeTemplate(sqlmapVm, sqlmapDir + tableBean.getClassName() + "Mapper.xml", ctx);
         } catch (Exception e) {
             logger.error("表[" + tablename + "]生成出错，异常是:", e);
         }

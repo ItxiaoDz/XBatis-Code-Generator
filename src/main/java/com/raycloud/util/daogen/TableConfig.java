@@ -49,7 +49,8 @@ public class TableConfig {
     //update
     private boolean updateKey = true;
     private boolean updateKeys = false;
-
+    private boolean updateKeySelective = true;
+    
     //截取防止data to long
     private boolean subString = true;
 
@@ -163,7 +164,15 @@ public class TableConfig {
         return this;
     }
 
-    public Set<String[]> getUpdateCols() {
+    public boolean isUpdateKeySelective() {
+		return updateKeySelective;
+	}
+
+	public void setUpdateKeySelective(boolean updateKeySelective) {
+		this.updateKeySelective = updateKeySelective;
+	}
+
+	public Set<String[]> getUpdateCols() {
         return updateCols;
     }
 

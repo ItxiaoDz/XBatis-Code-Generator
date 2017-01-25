@@ -28,5 +28,5 @@ import $!{gb.packageName}.impl.model.$!{tbb.className}Key;
 @Component
 public class $!{tbb.className}ServiceImpl extends STBaseServiceImpl<$!{tbb.className}, $!{tbb.className}Query, #if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end> implements $!{tbb.className}Service{
 	
-	private static final Log log = LogFactory.getLog(BeanPlanCountServiceImpl.class);
+	private static final Log log = LogFactory.getLog($!{tbb.className}ServiceImpl.class);
 }

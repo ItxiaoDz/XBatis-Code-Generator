@@ -14,6 +14,10 @@ public class ColBean {
 	private String colType;
 	/** 字段类型java.sql.Types，例如：Types.VARCHAR*/
 	private int colSQLType;
+	/**
+	 * jdbc类型名称
+	 */
+	private String jdbcType;
 	/** 字段是否可以为空 */
 	private boolean nullable;
 	/** 字段可为空时的缺省*/
@@ -105,6 +109,14 @@ public class ColBean {
 
 	public void setColType(String colType) {
 		this.colType = colType;
+	}
+
+	public String getJdbcType() {
+		return jdbcType;
+	}
+
+	public void setJdbcType(String jdbcType) {
+		this.jdbcType = jdbcType;
 	}
 
 	public int getColSQLType() {

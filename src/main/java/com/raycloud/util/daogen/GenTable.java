@@ -8,6 +8,7 @@ import java.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.raycloud.util.daogen.util.MySqlTypes;
 import com.raycloud.util.daogen.util.StringUtil;
 
 public class GenTable {
@@ -250,7 +251,7 @@ public class GenTable {
 				String colName = rs.getString(4);
                 /**去掉列名小写cb.setColName(colName.toLowerCase());**/
                 cb.setColName(colName);
-				cb.setColType(rs.getString(6));	//列类型
+//				cb.setColType(rs.getString(6));	//列类型
 				cb.setColComment(StringUtils.isBlank(rs.getString(12))?cb.getColName():rs.getString(12));	//列注释
 				cb.setNullable(rs.getInt(11)==0?false:true);	//是否可为空
 				cb.setDefaultValue(rs.getString(13));
@@ -263,6 +264,7 @@ public class GenTable {
 				if(!as.containsKey(sqltype)){
 					as.put(sqltype, "typeName:" + rs.getString(6) + " -> className:【无】");
 				}
+				cb.setJdbcType(MySqlTypes.getSqlTypeName(sqltype));
 				Set<String> pkfieldNameSet = allTablePK.get(tableBean.getTableName());
                 boolean isPrimaryKey = pkfieldNameSet.contains(colName);
                 cb.setPK(isPrimaryKey);
