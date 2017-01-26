@@ -22,12 +22,12 @@
 #macro(pkField $tbb $str)
     #foreach($cb in $tbb.pkcol)$!{cb.colNameCheck}#if(!$foreach.last) , #end#end
 #end
-#macro(pkFieldWithParamName $tbb)
+#macro(pklFieldAndValue2 $tbb)
 	#if(!$tbb.isMultiPk)
-        ${$tbb.pkcol.get(0).colNameCheck}=#{pk,jdbcType=$tbb.pkcol.get(0).jdbcType}
+        ${tbb.pkcol.get(0).colNameCheck}=#{_pk,jdbcType=$tbb.pkcol.get(0).jdbcType}
     #else
     #foreach($pkcol in $tbb.pkcol)
-        ${pkcol.colNameCheck}=#{pk.${pkcol.propertyName},jdbcType=$!{pkcol.jdbcType}} #if(!$foreach.last) AND #end
+        ${pkcol.colNameCheck}=#{${pkcol.propertyName},jdbcType=$!{pkcol.jdbcType}} #if(!$foreach.last) AND #end
     #end
     #end
 #end
@@ -39,7 +39,7 @@
 ##批量删除与查找
 #macro(pklFieldAndValues $tbb)
         #if(!$tbb.isMultiPk)
-            ${$tbb.pkcol.get(0).colNameCheck} in 
+            ${tbb.pkcol.get(0).colNameCheck} in 
             <foreach item="item" index="index" collection="list" open="("
 				separator="," close=")">
 				#{item}
@@ -102,7 +102,7 @@
            ##POJO对象上没有Field属性所以选择selector会抛出异常,临时解决
            SELECT   <include refid="Base_Column_List" />  FROM ${tbb.tableName}
                 WHERE
-           #pklFieldAndValue( $tbb )
+           #pklFieldAndValue2( $tbb )
         </select>
     #end
     #if($conf.isGetByKeys())
@@ -120,7 +120,7 @@
         <delete id="deleteByPrimaryKey">
             DELETE FROM ${tbb.tableName}
                 WHERE
-            #pklFieldAndValue( $tbb )
+            #pklFieldAndValue2( $tbb )
         </delete>
     #end
 
@@ -226,7 +226,7 @@
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
             now()#if(!$foreach.last), #end
 #else
-			#{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}}#if(!$foreach.last), #end
+			#{item.$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}}#if(!$foreach.last), #end
 #end
 #end
 			)

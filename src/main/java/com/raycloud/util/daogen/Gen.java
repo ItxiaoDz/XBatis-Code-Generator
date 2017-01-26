@@ -41,7 +41,7 @@ public class Gen {
      */
     static {
         tconfig.put("t_byzw_user", TableConfig.build("t_byzw_user").setTablePrefix("t_"));
-        tconfig.put("t_user", TableConfig.build("t_user").setTablePrefix("t_"));
+        tconfig.put("t_user_one_pk", TableConfig.build("t_user").setTablePrefix("t_"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })
