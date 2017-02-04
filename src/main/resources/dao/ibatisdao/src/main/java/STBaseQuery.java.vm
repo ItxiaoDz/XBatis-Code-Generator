@@ -6,7 +6,8 @@
 package $!{gb.rootPackageName}.core.common.api.base;
 
 import java.io.Serializable;
-
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -16,17 +17,24 @@ import lombok.Data;
  * @author $!{gb.userName}
  */
 @Data
+@ApiModel
 public class STBaseQuery implements Serializable {
 	private static final long serialVersionUID = -7018086326848324004L;
 	
 	public final static int DEFAULT_PAGE_SIZE = 10;
     public final static int DEFAULT_PAGE_NUM = 1;
     private Integer rownum_;
+    @ApiModelProperty(value = "page")
 	protected Integer page = DEFAULT_PAGE_NUM;
+	@ApiModelProperty(value = "pageSize")
 	protected Integer pageSize = DEFAULT_PAGE_SIZE;
+	@ApiModelProperty(value = "startRow")
 	protected Integer startRow;//起始行
+	@ApiModelProperty(value = "endRow")
 	protected Integer endRow;//结束行(闭合)
+	@ApiModelProperty(value = "sort")
 	private String sort;
+	@ApiModelProperty(value = "order")
 	private String order;
 	private Integer totalCount;
     private Integer totalPage;

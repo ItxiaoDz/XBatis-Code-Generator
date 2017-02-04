@@ -32,6 +32,8 @@ import java.math.BigDecimal;
 #end
 #end
 import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 /**
  * <br>类描述:
@@ -40,6 +42,7 @@ import lombok.Data;
  * @date  [$!{gb.nowDate}]
  */
  @Data
+ @ApiModel
 public class $!{tbb.className}Key implements Serializable{
 
     /**
@@ -51,6 +54,7 @@ public class $!{tbb.className}Key implements Serializable{
 	/**
      * $!{cb.colComment}
      */
+     @ApiModelProperty(value = "$!{cb.propertyName}")
     private $!{cb.propertyType} $!{cb.propertyName};
 #end
 }

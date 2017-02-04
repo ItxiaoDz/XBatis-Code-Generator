@@ -31,6 +31,9 @@ package $!{gb.packageName}.api.domain.query;
     #end
 #end
 import java.util.*;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 
 import $!{gb.rootPackageName}.core.common.api.base.STBaseQuery;
 /**
@@ -39,12 +42,14 @@ import $!{gb.rootPackageName}.core.common.api.base.STBaseQuery;
  * @author  $!{gb.userName}
  * @date  [$!{gb.nowDate}]
  */
+ @ApiModel
 public class $!{tbb.className}Query extends STBaseQuery {
 
 	/**==============================批量查询、更新、删除时的Where条件设置==================================**/
 #foreach($cb in $tbb.colList)
 #if($!{cb.propertyType}!="Date")
 	/** $!{cb.colComment} **/
+	@ApiModelProperty(value = "$!{cb.propertyName}")
     private $!{cb.propertyType} $!{cb.propertyName};
 	public $!{cb.propertyType} get$!{cb.methodName} () {
     	return $!{cb.propertyName};
@@ -55,6 +60,7 @@ public class $!{tbb.className}Query extends STBaseQuery {
     }
 #elseif(${cb.colName}!=${conf.addField} && ${cb.colName}!=${conf.updField})
     /** $!{cb.colComment} **/
+    @ApiModelProperty(value = "$!{cb.propertyName}")
     private $!{cb.propertyType} $!{cb.propertyName}Start;
     public $!{cb.propertyType} get$!{cb.methodName}Start () {
         return $!{cb.propertyName}Start;
@@ -64,6 +70,7 @@ public class $!{tbb.className}Query extends STBaseQuery {
         return this;
     }
 
+	@ApiModelProperty(value = "$!{cb.propertyName}")
     private $!{cb.propertyType} $!{cb.propertyName}End;
     public $!{cb.propertyType} get$!{cb.methodName}End () {
         return $!{cb.propertyName}End;
@@ -72,7 +79,8 @@ public class $!{tbb.className}Query extends STBaseQuery {
         this.$!{cb.propertyName}End = $!{cb.propertyName};
         return this;
     }
-
+	
+	@ApiModelProperty(value = "$!{cb.propertyName}")
     private $!{cb.propertyType} $!{cb.propertyName}Equal;
     public $!{cb.propertyType} get$!{cb.methodName}Equal () {
         return $!{cb.propertyName}Equal;
