@@ -31,6 +31,9 @@ import java.math.BigDecimal;
 #set($bigDecimal=true)
 #end
 #end
+
+import com.stframework.core.common.api.domain.po.BasePO;
+
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -41,9 +44,9 @@ import lombok.Data;
  * @author  $!{gb.userName}
  * @date  [$!{gb.nowDate}]
  */
- @Data
- @ApiModel
-public class $!{tbb.className}Key implements Serializable{
+@Data
+@ApiModel
+public class $!{tbb.className}Key extends BasePO {
 
     /**
 	 *序列化ID
@@ -54,7 +57,12 @@ public class $!{tbb.className}Key implements Serializable{
 	/**
      * $!{cb.colComment}
      */
-     @ApiModelProperty(value = "$!{cb.propertyName}")
+    @ApiModelProperty(value = "$!{cb.propertyName}")
     private $!{cb.propertyType} $!{cb.propertyName};
 #end
+
+	@Override
+    public String toString() {
+ 		return super.toString();
+ 	}
 }
