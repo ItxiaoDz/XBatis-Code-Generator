@@ -40,8 +40,20 @@ public class Gen {
      * 对于dao的生成，暂时特殊定制，硬编码。key 为数据库表名，暂不全量配置
      */
     static {
-        tconfig.put("t_byzw_user", TableConfig.build("t_byzw_user").setTablePrefix("t_"));
-        tconfig.put("t_user_one_pk", TableConfig.build("t_user").setTablePrefix("t_"));
+//        tconfig.put("t_sync_info", TableConfig.build("t_sync_info").setTablePrefix("t_"));
+//        tconfig.put("t_lottery_person", TableConfig.build("t_lottery_person").setTablePrefix("t_"));
+    	tconfig.put("upms_account", TableConfig.build("upms_account")
+    			.addQueryMethodAndCol("getByAccount", new String[]{"account"}));
+    	tconfig.put("upms_log", TableConfig.build("upms_log"));
+    	tconfig.put("upms_organization", TableConfig.build("upms_organization"));
+    	tconfig.put("upms_permission", TableConfig.build("upms_permission"));
+    	tconfig.put("upms_role", TableConfig.build("upms_role"));
+    	tconfig.put("upms_role_permission", TableConfig.build("upms_role_permission"));
+    	tconfig.put("upms_system", TableConfig.build("upms_system"));
+    	tconfig.put("upms_user", TableConfig.build("upms_user"));
+    	tconfig.put("upms_user_organization", TableConfig.build("upms_user_organization"));
+    	tconfig.put("upms_user_permission", TableConfig.build("upms_user_permission"));
+    	tconfig.put("upms_user_role", TableConfig.build("upms_user_role"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })

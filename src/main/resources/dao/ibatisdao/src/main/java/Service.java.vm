@@ -14,6 +14,9 @@ import $!{gb.packageName}.api.domain.query.$!{tbb.className}Query;
 #if($!{tbb.isMultiPk})
 import $!{gb.packageName}.impl.model.$!{tbb.className}Key;
 #end
+#if($conf.selectMap.size()>0)
+import java.util.List;
+#end
 
 /**
  * <br>类描述:
@@ -22,5 +25,12 @@ import $!{gb.packageName}.impl.model.$!{tbb.className}Key;
  * @date  [$!{gb.nowDate}]
  */
 public interface $!{tbb.className}Service extends STBaseService<$!{tbb.className}, $!{tbb.className}Query, #if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end>{
-  
+##定制产生select方法。
+#if($conf.selectMap.size()>0)
+#foreach($sel in $conf.selectMap.keySet())
+#if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).size()>0)
+   public List<$!{tbb.className}> $sel(#foreach($w in $conf.selectMap.get($sel))#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end ${tbb.colMap.get($w).propertyType} ${tbb.colMap.get($w).propertyName} #end #end);
+#end
+#end
+#end
 }

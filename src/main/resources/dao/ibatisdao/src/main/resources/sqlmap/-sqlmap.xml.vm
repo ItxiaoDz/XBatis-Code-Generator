@@ -261,19 +261,19 @@
 #end
         </trim>
     </insert>
-
-    ##定制产生select方法。
-        #if($conf.selectMap.size()>0)
-            #foreach($sel in $conf.selectMap.keySet())
-                #if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).size()>0)
-                <select id="$!{tbb.className}.$sel" parameterClass="hashMap" resultMap="${tbb.objectName}">
-                    <include refid="${tbb.objectName}${PO}.selector"/>
-                    where #foreach($w in $conf.selectMap.get($sel))
-                    #if($!{tbb.colMap.get($w)})
-                        #if(!$foreach.first) and #end $w = #$!{tbb.colMap.get($w).colName}#
-                    #end
-                #end
-                </select>
+       
+##定制产生select方法。
+#if($conf.selectMap.size()>0)
+#foreach($sel in $conf.selectMap.keySet())
+#if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).size()>0)
+    <select id="$sel" resultMap="${tbb.objectName}"  parameterType="hashMap">
+        SELECT   <include refid="Base_Column_List" />  FROM ${tbb.tableName}
+        where #foreach($w in $conf.selectMap.get($sel))
+        #if($!{tbb.colMap.get($w)})
+ #if(!$foreach.first) and #end $w=#{${tbb.colMap.get($w).propertyName},jdbcType=$!{tbb.colMap.get($w).jdbcType}}
+#end
+#end
+	</select>
                 #end
             #end
         #end
