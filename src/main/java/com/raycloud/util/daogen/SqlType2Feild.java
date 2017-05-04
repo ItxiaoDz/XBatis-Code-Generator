@@ -23,7 +23,7 @@ public class SqlType2Feild {
 		sqltype2Feild.put(Types.DATE, "Date");	//java.util.Date
 		//mysql
 		sqltype2Feild.put(Types.BIT, "Byte");
-		sqltype2Feild.put(Types.TINYINT, "Byte");
+		sqltype2Feild.put(Types.TINYINT, "Short");
 		sqltype2Feild.put(Types.SMALLINT, "Integer");
 		sqltype2Feild.put(Types.INTEGER, "Integer");
 		sqltype2Feild.put(Types.BIGINT, "Long");

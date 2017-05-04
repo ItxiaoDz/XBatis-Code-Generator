@@ -95,6 +95,14 @@
 #end
         </where>
     </sql>
+    
+    <!-- 排序字段 -->
+    <sql id="selectOrder">
+   		<foreach item="item" index="index" collection="orderFields" open=" order by "
+			separator=",">
+			#{item.fieldName} #{item.order} 
+		</foreach>
+    </sql>
 
     #if($conf.isGetByKey())
         <!-- 根据主键查询 -->
@@ -175,6 +183,7 @@
 		<include refid="Base_Column_List" />
 		from ${tbb.tableName}
 		<include refid="selectParams" />
+		<include refid="selectOrder" />
 	</select>
 	
 	<!-- 搜索分页列表信息 -->
@@ -183,6 +192,7 @@
 		<include refid="Base_Column_List" />
 		from ${tbb.tableName}
 		<include refid="selectParams" />
+		<include refid="selectOrder" />
 	</select>
     
     ##add代码

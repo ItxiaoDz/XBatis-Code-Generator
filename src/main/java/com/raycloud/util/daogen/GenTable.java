@@ -191,7 +191,9 @@ public class GenTable {
                 rs = dbmd.getIndexInfo(null, null, t, true,false);
                  Set<String> set =new LinkedHashSet<String>();
                 while (rs.next()) {
-                    set.add(rs.getString("COLUMN_NAME"));
+                	logger.info(rs.getString("COLUMN_NAME")+" "+rs.getString("NON_UNIQUE")+" "+rs.getString("INDEX_NAME"));
+                    if ("PRIMARY".equals(rs.getString("INDEX_NAME")))
+                    	set.add(rs.getString("COLUMN_NAME"));
                 }
                 map.put(t.toLowerCase(), set);
             }
