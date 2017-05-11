@@ -33,9 +33,9 @@ public class SqlType2Feild {
 		sqltype2Feild.put(Types.CHAR, "String");
 		sqltype2Feild.put(Types.LONGVARCHAR, "String");
 		
-		sqltype2Feild.put(Types.BINARY, "Blob");	//java.sql.Blob
-		sqltype2Feild.put(Types.VARBINARY, "Blob");	//java.sql.Blob
-		sqltype2Feild.put(Types.LONGVARBINARY, "Blob");	//java.sql.Blob
+		sqltype2Feild.put(Types.BINARY, "String");	//java.sql.Blob
+		sqltype2Feild.put(Types.VARBINARY, "String");	//java.sql.Blob
+		sqltype2Feild.put(Types.LONGVARBINARY, "String");	//java.sql.Blob
 		
 		sqltype2Feild.put(Types.TIME, "Date");	//java.util.Date
 		sqltype2Feild.put(Types.TIMESTAMP, "Date");	//java.util.Date

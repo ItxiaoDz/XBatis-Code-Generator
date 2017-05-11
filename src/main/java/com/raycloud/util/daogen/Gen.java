@@ -41,19 +41,16 @@ public class Gen {
      */
     static {
 //        tconfig.put("t_sync_info", TableConfig.build("t_sync_info").setTablePrefix("t_"));
-//        tconfig.put("t_lottery_person", TableConfig.build("t_lottery_person").setTablePrefix("t_"));
-    	tconfig.put("upms_account", TableConfig.build("upms_account")
-    			.addQueryMethodAndCol("getByAccount", new String[]{"account"}));
-//    	tconfig.put("upms_log", TableConfig.build("upms_log"));
-//    	tconfig.put("upms_organization", TableConfig.build("upms_organization"));
-//    	tconfig.put("upms_permission", TableConfig.build("upms_permission"));
-//    	tconfig.put("upms_role", TableConfig.build("upms_role"));
-//    	tconfig.put("upms_role_permission", TableConfig.build("upms_role_permission"));
-//    	tconfig.put("upms_system", TableConfig.build("upms_system"));
-    	tconfig.put("upms_user", TableConfig.build("upms_user"));
-//    	tconfig.put("upms_user_organization", TableConfig.build("upms_user_organization"));
-//    	tconfig.put("upms_user_permission", TableConfig.build("upms_user_permission"));
-//    	tconfig.put("upms_user_role", TableConfig.build("upms_user_role"));
+        tconfig.put("t_institutions", TableConfig.build("t_institutions").setTablePrefix("t_"));
+        tconfig.put("t_department", TableConfig.build("t_department").setTablePrefix("t_"));
+    	tconfig.put("t_staff", TableConfig.build("t_staff").setTablePrefix("t_")
+    			.addQueryMethodAndCol("getByName", new String[]{"name"})
+    			.addQueryMethodAndCol("getByPhone", new String[]{"phone"}));    	
+    	tconfig.put("t_role", TableConfig.build("t_role").setTablePrefix("t_"));
+    	tconfig.put("t_permission", TableConfig.build("t_permission").setTablePrefix("t_"));
+    	tconfig.put("t_staff_role", TableConfig.build("t_staff_role").setTablePrefix("t_"));
+    	tconfig.put("t_role_permission", TableConfig.build("t_role_permission").setTablePrefix("t_"));
+    	tconfig.put("t_role_permission", TableConfig.build("t_role_permission").setTablePrefix("t_"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })
@@ -231,7 +228,9 @@ public class Gen {
             }
             // 生成SqlMap配置文件
             String sqlmapVm = settings.getTmplPath() + PATH_RESOURCES + "sqlmap/-sqlmap.xml.vm";
-            String sqlmapDir = settings.getGenPath() + settings.getTmplPath() + PATH_RESOURCES + "sqlmap/";
+            String sqlmapDir = settings.getGenPath() + settings.getTmplPath() + PATH_RESOURCES + "sqlmap/"+globalBean.getPackageName()+"/";
+            logger.info("---sqlmapDir:"+sqlmapDir);
+            FileUtil.mkDirs(sqlmapDir);
             VelocityTemplate.mergeTemplate(sqlmapVm, sqlmapDir + tableBean.getClassName() + "Mapper.xml", ctx);
         } catch (Exception e) {
             logger.error("表[" + tablename + "]生成出错，异常是:", e);
