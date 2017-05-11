@@ -57,7 +57,7 @@ public class TableConfig {
     /**
      * key 为方法名,如包含List,则生成list，String[]为过滤字段，关于排序和个数，limit请暂时另行添加
      */
-    private Map<String, String[]> selectMap = new HashMap<String, String[]>();
+    private Map<String, QueryMethod> selectMap = new HashMap<String, QueryMethod>();
 
     /**
      * key 为方法名结尾为，String[]为过滤字段，关于排序和个数，limit请暂时另行添加,建立一个三元map。
@@ -84,9 +84,50 @@ public class TableConfig {
         this.name = name;
         return this;
     }
+    
+    public class QueryMethod {
+		String methodName;
+    	String[] wheres;
+    	boolean isListResult;
+    	
+    	QueryMethod(String methodName, String[] wheres, boolean isListResult) {
+    		this.methodName = methodName;
+    		this.wheres = wheres;
+    		this.isListResult = isListResult;
+    	}
+    	
+    	public String getMethodName() {
+			return methodName;
+		}
 
+		public void setMethodName(String methodName) {
+			this.methodName = methodName;
+		}
+
+		public String[] getWheres() {
+			return wheres;
+		}
+
+		public void setWheres(String[] wheres) {
+			this.wheres = wheres;
+		}
+
+		public boolean isListResult() {
+			return isListResult;
+		}
+
+		public void setListResult(boolean isListResult) {
+			this.isListResult = isListResult;
+		}
+    }
+    
     public TableConfig addQueryMethodAndCol(String method, String[] wheres) {
-        this.selectMap.put(method, wheres);
+        this.selectMap.put(method, new QueryMethod(method, wheres, true));
+        return this;
+    }
+    
+    public TableConfig addQueryMethodAndCol(String method, String[] wheres, boolean isListResult) {
+        this.selectMap.put(method, new QueryMethod(method, wheres, isListResult));
         return this;
     }
 
@@ -184,7 +225,7 @@ public class TableConfig {
         return orderCol;
     }
 
-    public Map<String, String[]> getSelectMap() {
+    public Map<String, QueryMethod> getSelectMap() {
         return selectMap;
     }
 

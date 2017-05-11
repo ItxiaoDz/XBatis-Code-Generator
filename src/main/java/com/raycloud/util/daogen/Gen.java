@@ -44,8 +44,8 @@ public class Gen {
         tconfig.put("t_institutions", TableConfig.build("t_institutions").setTablePrefix("t_"));
         tconfig.put("t_department", TableConfig.build("t_department").setTablePrefix("t_"));
     	tconfig.put("t_staff", TableConfig.build("t_staff").setTablePrefix("t_")
-    			.addQueryMethodAndCol("getByName", new String[]{"name"})
-    			.addQueryMethodAndCol("getByPhone", new String[]{"phone"}));    	
+    			.addQueryMethodAndCol("getByName", new String[]{"name"}, false)
+    			.addQueryMethodAndCol("getByPhone", new String[]{"phone"},false));    	
     	tconfig.put("t_role", TableConfig.build("t_role").setTablePrefix("t_"));
     	tconfig.put("t_permission", TableConfig.build("t_permission").setTablePrefix("t_"));
     	tconfig.put("t_staff_role", TableConfig.build("t_staff_role").setTablePrefix("t_"));

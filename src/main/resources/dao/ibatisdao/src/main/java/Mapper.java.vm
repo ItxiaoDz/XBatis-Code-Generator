@@ -30,8 +30,8 @@ import java.util.List;
 ##定制产生select方法。
 #if($conf.selectMap.size()>0)
 #foreach($sel in $conf.selectMap.keySet())
-#if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).size()>0)
-   public List<$!{tbb.className}> $sel(#foreach($w in $conf.selectMap.get($sel))#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end ${tbb.colMap.get($w).propertyType} ${tbb.colMap.get($w).propertyName} #end #end);
+#if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).wheres.size()>0)
+   public #if( $conf.selectMap.get($sel).isListResult)List<$!{tbb.className}>#else $!{tbb.className} #end $sel(#foreach($w in $conf.selectMap.get($sel).wheres)#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end ${tbb.colMap.get($w).propertyType} ${tbb.colMap.get($w).propertyName} #end #end);
 #end
 #end
 #end
