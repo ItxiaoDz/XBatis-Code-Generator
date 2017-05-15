@@ -270,6 +270,11 @@ public class GenTable {
 				Set<String> pkfieldNameSet = allTablePK.get(tableBean.getTableName());
                 boolean isPrimaryKey = pkfieldNameSet.contains(colName);
                 cb.setPK(isPrimaryKey);
+                
+                if (isPrimaryKey && cb.isAutoIncrement()) {
+                	tableBean.setIsAutoIncrsId(true);
+                }
+                
                 tableBean.addColBean(cb);
 			}
             /**根据主键列名获取列对象**/

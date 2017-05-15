@@ -50,6 +50,18 @@ public class TableBean {
 		this.isMultiPk = isMultiPk;
 	}
 	
+	/**
+	 * 是否为自增主键表
+	 */
+	private boolean isAutoIncrsId = false;
+	public boolean getIsAutoIncrsId() {
+		return isAutoIncrsId;
+	}
+
+	public void setIsAutoIncrsId(boolean isAutoIncrsId) {
+		this.isAutoIncrsId = isAutoIncrsId;
+	}
+	
 	/** ================根据表结构生成表对象及字段信息====================== */
 	/** 类名 */
 	private String className;

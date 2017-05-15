@@ -54,6 +54,8 @@ public class TableConfig {
     //截取防止data to long
     private boolean subString = true;
 
+    private boolean autoIncrsId = false;
+    
     /**
      * key 为方法名,如包含List,则生成list，String[]为过滤字段，关于排序和个数，limit请暂时另行添加
      */
@@ -291,4 +293,12 @@ public class TableConfig {
         this.subString = subString;
         return this;
     }
+
+	public boolean isAutoIncrsId() {
+		return autoIncrsId;
+	}
+
+	public void setAutoIncrsId(boolean autoIncrsId) {
+		this.autoIncrsId = autoIncrsId;
+	}
 }

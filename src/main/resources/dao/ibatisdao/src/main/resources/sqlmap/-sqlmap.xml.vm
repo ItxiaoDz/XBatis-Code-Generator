@@ -197,7 +197,8 @@
     
     ##add代码
     <!--保存所有字段 -->
-    <insert id="insert" parameterType="$!{gb.packageName}.impl.model.${tbb.className}">
+    <insert id="insert" parameterType="$!{gb.packageName}.impl.model.${tbb.className}"
+    	#if($!{tbb.isAutoIncrsId} && !$!{tbb.isMultiPk})  useGeneratedKeys="true" keyProperty="#foreach($cb in $tbb.pkcol)$!{cb.propertyName}#if(!$foreach.last) , #end#end" #end >
 		INSERT INTO ${tbb.tableName}(
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
@@ -244,7 +245,8 @@
 	</insert>
     
     <!--保存所有不为空的字段 -->
-    <insert id="insertSelective" parameterType="$!{gb.packageName}.impl.model.${tbb.className}" >
+    <insert id="insertSelective" parameterType="$!{gb.packageName}.impl.model.${tbb.className}" 
+    	#if($!{tbb.isAutoIncrsId} && !$!{tbb.isMultiPk})  useGeneratedKeys="true" keyProperty="#foreach($cb in $tbb.pkcol)$!{cb.propertyName}#if(!$foreach.last) , #end#end" #end>
         INSERT INTO ${tbb.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
 ##循环所有字段
