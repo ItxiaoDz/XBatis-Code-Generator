@@ -108,5 +108,15 @@ import $!{gb.rootPackageName}.core.common.api.base.STBaseMapper;
 		PageInfo<T> pageN = new PageInfo<T>(list);
 		return pageN;
 	}
+	
+	/**
+	 * 获取列表数量
+	 * @param record
+	 * @return
+	 */
+	 @Override
+	Long countList(Q params) {
+		return baseMapper.countList(params);
+	}
  } 
 

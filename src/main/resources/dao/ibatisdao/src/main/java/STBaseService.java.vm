@@ -99,5 +99,12 @@ import com.github.pagehelper.PageInfo;
 	 * @return
 	 */
 	PageInfo<T> selectListByPage(Q query);
+	
+	/**
+	 * 获取列表数量
+	 * @param record
+	 * @return
+	 */
+	Long countList(Q params);
  } 
 

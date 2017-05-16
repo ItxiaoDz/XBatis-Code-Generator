@@ -90,5 +90,12 @@ import java.util.List;
 	 * @return
 	 */
 	List<T> selectList(Q params);
+	
+	/**
+	 * 获取列表数量
+	 * @param record
+	 * @return
+	 */
+	Long countList(Q params);
  } 
 

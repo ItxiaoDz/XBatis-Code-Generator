@@ -41,7 +41,7 @@ public class Gen {
      */
     static {
 //        tconfig.put("t_sync_info", TableConfig.build("t_sync_info").setTablePrefix("t_"));
-        tconfig.put("t_institutions", TableConfig.build("t_institutions").setTablePrefix("t_"));
+//        tconfig.put("t_institutions", TableConfig.build("t_institutions").setTablePrefix("t_"));
 //        tconfig.put("t_department", TableConfig.build("t_department").setTablePrefix("t_"));
 //    	tconfig.put("t_staff", TableConfig.build("t_staff").setTablePrefix("t_")
 //    			.addQueryMethodAndCol("getByName", new String[]{"name"}, false)
@@ -52,6 +52,7 @@ public class Gen {
 //    	tconfig.put("t_role_permission", TableConfig.build("t_role_permission").setTablePrefix("t_"));
 //    	tconfig.put("t_role_permission", TableConfig.build("t_role_permission").setTablePrefix("t_"));
 //    	tconfig.put("t_staff_permission", TableConfig.build("t_staff_permission").setTablePrefix("t_"));
+    	tconfig.put("t_staff_department", TableConfig.build("t_staff_department").setTablePrefix("t_"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })

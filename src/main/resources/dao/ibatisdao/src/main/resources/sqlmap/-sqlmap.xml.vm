@@ -78,7 +78,7 @@
         <where>
 #foreach($cb in $tbb.colList)
 #if($cb.propertyType !="Date" )
-			<if test="$!cb.propertyName != null and $!cb.propertyName != ''">
+			<if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
 	            AND $!{cb.colNameCheck}=#{$!{cb.propertyName}, jdbcType=$!{cb.jdbcType}}
 	        </if>
 #elseif(${cb.colName}!=${conf.addField} && ${cb.colName}!=${conf.updField})
@@ -149,7 +149,7 @@
 	        <set>
 #foreach($cb in $tbb.colList)
 #if(${cb.colName}!=${conf.addField} && ${cb.colName}!=${conf.updField})
-                <if test="$!cb.propertyName != null and $!cb.propertyName != ''">
+                <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end">
                     $cb.colNameCheck = #{$!{cb.propertyName}, jdbcType=$!{cb.jdbcType}},
                 </if>
 #end
@@ -193,6 +193,14 @@
 		from ${tbb.tableName}
 		<include refid="selectParams" />
 		<include refid="selectOrder" />
+	</select>
+	
+	<!-- 搜索分页列表信息 -->
+	<select id="countList" parameterType="map" resultType="java.lang.Long" >
+		select
+		 count(1)
+		from ${tbb.tableName}
+		<include refid="selectParams" />
 	</select>
     
     ##add代码
@@ -254,7 +262,7 @@
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
             $!{cb.colName.trim()},
 #else
-            <if test="$!cb.propertyName != null and $!cb.propertyName != ''">
+            <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
                 $!{cb.colNameCheck.trim()},
             </if >
 #end
@@ -266,7 +274,7 @@
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
             now(),
 #else
-            <if test="$!cb.propertyName != null and $!cb.propertyName != ''">
+            <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
                     #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}},
             </if >
 #end
