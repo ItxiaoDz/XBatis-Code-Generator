@@ -10,9 +10,14 @@
 ##$!{cb.colName}字段列名，如：full_name
 ##$!{cb.propertyType}字段属性类型名，如：String
 ##$!{gb.packageName}包名，如：net.letuu.order
+#set($VO = $!{gb.voSuffix})
+#set($PO = $!{gb.objSuffix})
 ##所有字段
 #macro(allField $tbb)
     #foreach($cb in $tbb.colList)$!{cb.colNameCheck}#if(!$foreach.last) , #end#end
+#end
+#macro(allFieldWithTableName $tbb)
+    #foreach($cb in $tbb.colList)_$!{tbb.objectName}.$!{cb.colNameCheck}#if(!$foreach.last) , #end#end
 #end
 #macro(allFieldAndValue $tbb )
     #foreach($pkcol in $tbb.colList)
@@ -62,7 +67,7 @@
     <typeAlias alias="${tbb.className}Query" type="$!{gb.packageName}.query.${tbb.className}Query"/>
     <typeAlias alias="${tbb.className}" type="$!{gb.packageName}.pojo.${tbb.className}${PO}"/>
     -->
-    <resultMap id="${tbb.objectName}" type="$!{gb.packageName}.impl.model.${tbb.className}">
+    <resultMap id="${tbb.objectName}VO" type="$!{gb.packageName}.api.domain.vo.${tbb.className}${VO}">
     #foreach($cb in $tbb.pkcol)
         <id property="$!cb.propertyName" column="$!cb.colName"/>
     #end
@@ -70,8 +75,14 @@
         <result property="$!cb.propertyName" column="$!cb.colName"/>
     #end
     </resultMap>
+    <resultMap id="${tbb.objectName}${PO}" type="$!{gb.packageName}.impl.model.${tbb.className}${PO}" extends="${tbb.objectName}VO">
+
+    </resultMap>
     <sql id="Base_Column_List">
 		#allField( $tbb )
+	</sql>
+    <sql id="Column_List_With_Tablename">
+		#allFieldWithTableName( $tbb )
 	</sql>
 	<!--查询条件 -->
 	<sql id="selectParams">
@@ -106,7 +117,7 @@
 
     #if($conf.isGetByKey())
         <!-- 根据主键查询 -->
-        <select id="selectByPrimaryKey" resultMap="${tbb.objectName}">
+        <select id="selectByPrimaryKey" resultMap="${tbb.objectName}VO">
            ##POJO对象上没有Field属性所以选择selector会抛出异常,临时解决
            SELECT   <include refid="Base_Column_List" />  FROM ${tbb.tableName}
                 WHERE
@@ -115,7 +126,7 @@
     #end
     #if($conf.isGetByKeys())
     	<!-- 根据多个主键查询 -->
-        <select id="selectByKeys" resultMap="${tbb.objectName}"  parameterType="hashMap">
+        <select id="selectByKeys" resultMap="${tbb.objectName}VO"  parameterType="hashMap">
             SELECT   <include refid="Base_Column_List" />  FROM ${tbb.tableName}
                 WHERE
             #pklFieldAndValues($tbb)
@@ -152,6 +163,13 @@
                 <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end">
                     $cb.colNameCheck = #{$!{cb.propertyName}, jdbcType=$!{cb.jdbcType}},
                 </if>
+#elseif (${cb.colName}==${conf.updField})
+			<if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
+                    $!{cb.colName.trim()} = #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}},
+            </if >
+            <if test="$!cb.propertyName == null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") or $!cb.propertyName == '' #end ">
+                    $!{cb.colName.trim()} = unix_timestamp(now()),
+            </if >
 #end
 #end
 	        </set>
@@ -168,6 +186,13 @@
 #foreach($cb in $tbb.colList)
 #if(${cb.colName}!=${conf.addField} && ${cb.colName}!=${conf.updField})
                 $cb.colNameCheck = #{$!{cb.propertyName}, jdbcType=$!{cb.jdbcType}},
+#elseif (${cb.colName}==${conf.updField})
+			<if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
+                    $!{cb.colName.trim()} = #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}},
+            </if >
+            <if test="$!cb.propertyName == null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") or $!cb.propertyName == '' #end ">
+                    $!{cb.colName.trim()} = unix_timestamp(now()),
+            </if >
 #end
 #end
 	        </set>
@@ -178,7 +203,7 @@
     #end
     
     <!-- 搜索列表信息 -->
-	<select id="selectList" parameterType="map" resultMap="${tbb.objectName}">
+	<select id="selectList" parameterType="map" resultMap="${tbb.objectName}VO">
 		select
 		<include refid="Base_Column_List" />
 		from ${tbb.tableName}
@@ -187,7 +212,7 @@
 	</select>
 	
 	<!-- 搜索分页列表信息 -->
-	<select id="selectListByPage" parameterType="map" resultMap="${tbb.objectName}">
+	<select id="selectListByPage" parameterType="map" resultMap="${tbb.objectName}VO">
 		select
 		<include refid="Base_Column_List" />
 		from ${tbb.tableName}
@@ -219,7 +244,12 @@
 		VALUES(
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
-            now()#if(!$foreach.last), #end
+            <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
+                    #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}},
+            </if >
+            <if test="$!cb.propertyName == null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") or $!cb.propertyName == '' #end ">
+                    unix_timestamp(now()),
+            </if >#if(!$foreach.last), #end
 #else
 			#{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}}#if(!$foreach.last), #end
 #end
@@ -243,7 +273,12 @@
 			(
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
-            now()#if(!$foreach.last), #end
+            <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
+                    #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}}
+            </if >
+            <if test="$!cb.propertyName == null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") or $!cb.propertyName == '' #end ">
+                    unix_timestamp(now())
+            </if >#if(!$foreach.last), #end
 #else
 			#{item.$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}}#if(!$foreach.last), #end
 #end
@@ -272,7 +307,12 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
-            now(),
+            <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
+                    #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}},
+            </if >
+            <if test="$!cb.propertyName == null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") or $!cb.propertyName == '' #end ">
+                    unix_timestamp(now()),
+            </if >
 #else
             <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
                     #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}},
@@ -286,7 +326,7 @@
 #if($conf.selectMap.size()>0)
 #foreach($sel in $conf.selectMap.keySet())
 #if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).wheres.size()>0)
-    <select id="$sel" resultMap="${tbb.objectName}"  parameterType="hashMap">
+    <select id="$sel" resultMap="${tbb.objectName}VO"  parameterType="hashMap">
         SELECT   <include refid="Base_Column_List" />  FROM ${tbb.tableName}
         where #foreach($w in $conf.selectMap.get($sel).wheres)
         #if($!{tbb.colMap.get($w)})

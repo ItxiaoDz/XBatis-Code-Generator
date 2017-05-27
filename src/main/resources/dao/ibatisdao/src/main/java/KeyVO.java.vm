@@ -9,12 +9,11 @@
 ##$!{cb.methodName}字段方法名，如：FullName
 ##$!{cb.propertyType}字段属性类型名，如：String
 ##$!{cb.colComment}字段注释，如：姓名全称
-#set($PO = $!{gb.objSuffix})
 #set($VO = $!{gb.voSuffix})
 #set($conf=$!{tbb.conf})
 #set($bigDecimal=false)
 #set($Date=false)
-package $!{gb.packageName}.impl.model;
+package $!{gb.packageName}.api.domain.vo;
 
 import java.util.*;
 #foreach($cb in $tbb.colList)
@@ -33,7 +32,7 @@ import java.math.BigDecimal;
 #end
 #end
 
-import $!{gb.packageName}.api.domain.vo.$!{tbb.className}${VO};
+import com.stframework.core.common.api.domain.vo.BaseVO;
 
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -47,24 +46,19 @@ import lombok.Data;
  */
 @Data
 @ApiModel
-public class $!{tbb.className}${PO} extends $!{tbb.className}${VO} {
+public class $!{tbb.className}Key${VO} extends BaseVO {
 
     /**
 	 *序列化ID
 	 */
 	private static final long serialVersionUID = 1L;
 
-#if($conf.isUpdateObj())
+#foreach($cb in $tbb.pkcol)
 	/**
-     * 需要更新时的代码，keys 代表主键list
+     * $!{cb.colComment}
      */
-	private List<Long> keys;
-#end
-#if($conf.isSplitTable())
-    /**
-    * 分表使用
-    */
-    private String tableId;
+    @ApiModelProperty(value = "$!{cb.propertyName}")
+    private $!{cb.propertyType} $!{cb.propertyName};
 #end
 
 	@Override

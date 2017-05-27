@@ -20,7 +20,7 @@ import com.github.pagehelper.PageInfo;
  * @param <P>查询实体
  * @param <I>主键
  */
- public interface STBaseService<T,Q,P> {
+ public interface STBaseService<T,V,Q,P> {
  	/**
 	 * 保存
 	 * @param record
@@ -78,27 +78,27 @@ import com.github.pagehelper.PageInfo;
 	 * @param id
 	 * @return
 	 */
-	T selectByPrimaryKey(P id);
+	V selectByPrimaryKey(P id);
 	/**
 	 * 根据id批量搜索
 	 * @param ids
 	 * @return
 	 */
-	List<T> selectByKeys(List<P> ids);
+	List<V> selectByKeys(List<P> ids);
 	
 	/**
 	 * 根据查询类查询内容（不分页）
 	 * @param record
 	 * @return
 	 */
-	List<T> selectList(Q params);
+	List<V> selectList(Q params);
 	
 	/**
 	 * 根据查询类查询分页内容
 	 * @param record
 	 * @return
 	 */
-	PageInfo<T> selectListByPage(Q query);
+	PageInfo<V> selectListByPage(Q query);
 	
 	/**
 	 * 获取列表数量

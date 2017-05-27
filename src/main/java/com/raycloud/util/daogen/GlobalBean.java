@@ -23,6 +23,9 @@ public class GlobalBean {
 	private List<String> tableNames;
 	
 	private String objSuffix="";
+	
+	private String voSuffix="VO";
+	
 	public String getNowDate() {
 		return nowDate;
 	}
@@ -69,6 +72,14 @@ public class GlobalBean {
 
 	public void setObjSuffix(String objSuffix) {
 		this.objSuffix = objSuffix;
+	}
+
+	public String getVoSuffix() {
+		return voSuffix;
+	}
+
+	public void setVoSuffix(String voSuffix) {
+		this.voSuffix = voSuffix;
 	}
 	
 }

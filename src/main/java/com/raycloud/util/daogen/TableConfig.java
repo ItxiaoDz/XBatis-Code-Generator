@@ -22,11 +22,11 @@ public class TableConfig {
     /**
      * 更新字段*
      */
-    private String updField = "upd_time";
+    private String updField = "update_time";
     /**
      * 新增字段*
      */
-    private String addField = "add_time";
+    private String addField = "create_time";
 
     private String name;
 

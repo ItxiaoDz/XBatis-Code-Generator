@@ -5,6 +5,8 @@
 ##$!{gb.nowDate}当前日期，如：2013-05-02
 ##$!{tbb.className}类名，如：UserInfo
 ##$!{tbb.objectName}对象名，如：userInfo
+#set($PO = $!{gb.objSuffix})
+#set($VO = $!{gb.voSuffix})
 
 package $!{gb.packageName}.impl.service;
 
@@ -13,12 +15,14 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import $!{gb.rootPackageName}.core.common.api.base.STBaseServiceImpl;
+import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseServiceImpl;
 import $!{gb.packageName}.impl.model.$!{tbb.className};
 import $!{gb.packageName}.api.domain.query.$!{tbb.className}Query;
 import $!{gb.packageName}.api.service.$!{tbb.className}Service;
+import $!{gb.packageName}.impl.model.$!{tbb.className}${PO};
+import $!{gb.packageName}.api.domain.vo.$!{tbb.className}${VO};
 #if($!{tbb.isMultiPk})
-import $!{gb.packageName}.impl.model.$!{tbb.className}Key;
+import $!{gb.packageName}.api.domain.vo.$!{tbb.className}Key${VO};
 #end
 #if($conf.selectMap.size()>0)
 import $!{gb.packageName}.impl.mapper.$!{tbb.className}Mapper;
@@ -34,7 +38,7 @@ import java.util.List;
  */
 @Component
 @Transactional
-public class $!{tbb.className}ServiceImpl extends STBaseServiceImpl<$!{tbb.className}, $!{tbb.className}Query, #if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end> implements $!{tbb.className}Service{
+public class $!{tbb.className}ServiceImpl extends STBaseServiceImpl<$!{tbb.className}${PO}, $!{tbb.className}${VO}, $!{tbb.className}Query, #if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end> implements $!{tbb.className}Service{
 	
 	private static final Log log = LogFactory.getLog($!{tbb.className}ServiceImpl.class);
 	
@@ -48,7 +52,7 @@ public class $!{tbb.className}ServiceImpl extends STBaseServiceImpl<$!{tbb.class
 #foreach($sel in $conf.selectMap.keySet())
 #if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).wheres.size()>0)
    @Override
-   public #if( $conf.selectMap.get($sel).isListResult)List<$!{tbb.className}>#else $!{tbb.className} #end $sel(#foreach($w in $conf.selectMap.get($sel).wheres)#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end ${tbb.colMap.get($w).propertyType} ${tbb.colMap.get($w).propertyName} #end #end) {
+   public #if( $conf.selectMap.get($sel).isListResult)List<$!{tbb.className}${VO}>#else $!{tbb.className}${VO} #end $sel(#foreach($w in $conf.selectMap.get($sel).wheres)#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end ${tbb.colMap.get($w).propertyType} ${tbb.colMap.get($w).propertyName} #end #end) {
        return tableMapper.$sel(#foreach($w in $conf.selectMap.get($sel).wheres)#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end ${tbb.colMap.get($w).propertyName} #end #end);
    }
 #end

@@ -52,7 +52,20 @@ public class Gen {
 //    	tconfig.put("t_role_permission", TableConfig.build("t_role_permission").setTablePrefix("t_"));
 //    	tconfig.put("t_role_permission", TableConfig.build("t_role_permission").setTablePrefix("t_"));
 //    	tconfig.put("t_staff_permission", TableConfig.build("t_staff_permission").setTablePrefix("t_"));
-    	tconfig.put("t_staff_department", TableConfig.build("t_staff_department").setTablePrefix("t_"));
+//    	tconfig.put("t_staff_department", TableConfig.build("t_staff_department").setTablePrefix("t_"));
+//    	tconfig.put("t_classroom", TableConfig.build("t_classroom").setTablePrefix("t_"));
+//    	tconfig.put("provinces", TableConfig.build("provinces")
+//    			.addQueryMethodAndCol("getByProvinceId", new String[]{"provinceid"}, false));
+//    	tconfig.put("cities", TableConfig.build("cities")
+//    			.addQueryMethodAndCol("getByCityId", new String[]{"cityid"}, false)
+//    			.addQueryMethodAndCol("queryByProvinceId", new String[]{"provinceid"}, true));
+//    	tconfig.put("areas", TableConfig.build("areas")
+//    			.addQueryMethodAndCol("queryByCityId", new String[]{"cityid"}, true)
+//    			.addQueryMethodAndCol("getByareaId", new String[]{"areaid"}, false));
+//    	tconfig.put("t_classes", TableConfig.build("t_classes").setTablePrefix("t_"));
+//    	tconfig.put("t_class_student", TableConfig.build("t_class_student").setTablePrefix("t_"));
+    	tconfig.put("t_course", TableConfig.build("t_course").setTablePrefix("t_"));
+    	tconfig.put("t_course_sku", TableConfig.build("t_course_sku").setTablePrefix("t_"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })
@@ -224,6 +237,7 @@ public class Gen {
                             .replace(".", "/");
                 }
                 FileUtil.mkDirs(javaDir + packageDir);
+                logger.info("----java dir"+javaDir + packageDir);
                 VelocityTemplate.mergeTemplate(settings.getTmplPath() + PATH_JAVA + "/" + vmFilename, javaDir
                         + packageDir + "/" + tableBean.getClassName() + createFilename, ctx);
                 logger.info(tableBean.getClassName() + createFilename);
@@ -275,6 +289,7 @@ public class Gen {
                 if (!vmFilename.startsWith("Base")&&!vmFilename.startsWith("STBase"))
                     continue; // 非基类代码跳过
                 createFilename = FileUtil.getFilenameWithoutExt(vmFilename);
+                logger.info("---create file name:"+createFilename);
                 packageStr = FileUtil.findLine(javaVmDir + "/" + vmFilename, "package");
                 if (StringUtils.isNotBlank(packageStr)) {
                 	if (packageStr.indexOf("$!{gb.packageName}")>0) {
@@ -291,6 +306,7 @@ public class Gen {
                     
                 }
                 FileUtil.mkDirs(javaDir + packageDir);
+                logger.info("---java file path:" + javaDir + packageDir);
                 VelocityTemplate.mergeTemplate(settings.getTmplPath() + PATH_JAVA + "/" + vmFilename, javaDir
                         + packageDir + "/" + createFilename, ctxCfg);
             }
