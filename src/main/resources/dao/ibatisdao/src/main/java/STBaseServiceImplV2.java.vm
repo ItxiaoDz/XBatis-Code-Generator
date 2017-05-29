@@ -11,12 +11,14 @@ package $!{gb.rootPackageName}.core.common.api.base.v2;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.ArrayList;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import $!{gb.rootPackageName}.core.common.api.base.STBaseQuery;
 import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseService;
 import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseMapper;
+import com.stframework.core.common.api.util.BeanUtils;
 
 /**
  * <br>类描述:Service基础实现类
@@ -27,25 +29,41 @@ import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseMapper;
  * @param <P>查询实体
  * @param <I>主键
  */
- public class STBaseServiceImpl<T, V, Q extends STBaseQuery,P> implements STBaseService<T,V, Q, P>{
+ public abstract class STBaseServiceImpl<T, V, Q extends STBaseQuery,P> implements STBaseService<V, Q, P>{
 	
 	@Autowired
 	protected STBaseMapper<T, V, Q, P> baseMapper;
 	
+	protected abstract T createModelInstance();
+	protected abstract void setVOIdFromPO(V vo, T po);
 	
-	public int insert(T record) {
-		return baseMapper.insert(record);
+	public int insert(V record) {
+		T model = createModelInstance();
+		BeanUtils.copyProperties(record, model);
+		int count = baseMapper.insert(model);
+		setVOIdFromPO(record, model);
+		return count;
 	}
 
 
 	
-	public int insertSelective(T record) {
-		return baseMapper.insertSelective(record);
+	public int insertSelective(V record) {
+		T model = createModelInstance();
+		BeanUtils.copyProperties(record, model);
+		int count = baseMapper.insert(model);
+		setVOIdFromPO(record, model);
+		return count;
 	}
 	
 	@Override
-	public int batchInsert(List<T> list) {
-		return baseMapper.batchInsert(list);
+	public int batchInsert(List<V> list) {
+		List<T> modelList = new ArrayList<T>();
+		for (V vo: list) {
+			T model = createModelInstance();
+			BeanUtils.copyProperties(vo, model);
+			modelList.add(model);
+		}
+		return baseMapper.batchInsert(modelList);
 	}
 
 	
@@ -62,20 +80,30 @@ import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseMapper;
 
 	
 	@Override
-	public int updateByPrimaryKey(T record) {
-		return baseMapper.updateByPrimaryKey(record);
+	public int updateByPrimaryKey(V record) {
+		T model = createModelInstance();
+		BeanUtils.copyProperties(record, model);
+		return baseMapper.updateByPrimaryKey(model);
 	}
 	
 	
 	@Override
-	public int updateByPrimaryKeySelective(T record) {
-		return baseMapper.updateByPrimaryKeySelective(record);
+	public int updateByPrimaryKeySelective(V record) {
+		T model = createModelInstance();
+		BeanUtils.copyProperties(record, model);
+		return baseMapper.updateByPrimaryKeySelective(model);
 	}
 	
 	
 	@Override
-	public int batchUpdate(List<T> list){
-		return baseMapper.batchUpdate(list);
+	public int batchUpdate(List<V> list){
+		List<T> modelList = new ArrayList<T>();
+		for (V vo: list) {
+			T model = createModelInstance();
+			BeanUtils.copyProperties(vo, model);
+			modelList.add(model);
+		}
+		return baseMapper.batchUpdate(modelList);
 	}
 
 
@@ -118,5 +146,5 @@ import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseMapper;
 	public Long countList(Q params) {
 		return baseMapper.countList(params);
 	}
- } 
+ }
 

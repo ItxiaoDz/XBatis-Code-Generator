@@ -20,24 +20,24 @@ import com.github.pagehelper.PageInfo;
  * @param <P>查询实体
  * @param <I>主键
  */
- public interface STBaseService<T,V,Q,P> {
+ public interface STBaseService<V,Q,P> {
  	/**
 	 * 保存
 	 * @param record
 	 * @return
 	 */
-	int insert(T record);
+	int insert(V record);
 	/**
 	 * 保存不为空选项
 	 * @param record
 	 * @return
 	 */
-	int insertSelective(T record);
+	int insertSelective(V record);
 	
 	/**
 	 * 批量新增
 	 */
-	int batchUpdate(List<T> list);
+	int batchUpdate(List<V> list);
 	
 	/**
 	 * 根据id删除
@@ -57,21 +57,21 @@ import com.github.pagehelper.PageInfo;
 	 * @param record
 	 * @return
 	 */
-	int updateByPrimaryKey(T record);
+	int updateByPrimaryKey(V record);
 	
 	/**
 	 * 根据id更新所选项
 	 * @param record
 	 * @return
 	 */
-	int updateByPrimaryKeySelective(T record);
+	int updateByPrimaryKeySelective(V record);
 	
 	/**
 	 * 批量新增
 	 * @param list
 	 * @return
 	 */
-	int batchInsert(List<T> list);
+	int batchInsert(List<V> list);
 	
 	/**
 	 * 根据id搜索

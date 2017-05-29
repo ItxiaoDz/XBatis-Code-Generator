@@ -11,9 +11,7 @@
 package $!{gb.packageName}.api.service;
 
 import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseService;
-import $!{gb.packageName}.impl.model.$!{tbb.className};
 import $!{gb.packageName}.api.domain.query.$!{tbb.className}Query;
-import $!{gb.packageName}.impl.model.$!{tbb.className}${PO};
 import $!{gb.packageName}.api.domain.vo.$!{tbb.className}${VO};
 #if($!{tbb.isMultiPk})
 import $!{gb.packageName}.api.domain.vo.$!{tbb.className}Key${VO};
@@ -28,7 +26,7 @@ import java.util.List;
  * @author  $!{gb.userName}
  * @date  [$!{gb.nowDate}]
  */
-public interface $!{tbb.className}Service extends STBaseService<$!{tbb.className}${PO}, $!{tbb.className}${VO}, $!{tbb.className}Query, #if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end>{
+public interface $!{tbb.className}Service extends STBaseService< $!{tbb.className}${VO}, $!{tbb.className}Query, #if($!{tbb.isMultiPk})$!{tbb.className}Key#else $tbb.pkcol.get(0).propertyType #end>{
 ##定制产生select方法。
 #if($conf.selectMap.size()>0)
 #foreach($sel in $conf.selectMap.keySet())

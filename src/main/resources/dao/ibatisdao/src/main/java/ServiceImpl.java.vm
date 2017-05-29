@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import $!{gb.rootPackageName}.core.common.api.base.v2.STBaseServiceImpl;
-import $!{gb.packageName}.impl.model.$!{tbb.className};
 import $!{gb.packageName}.api.domain.query.$!{tbb.className}Query;
 import $!{gb.packageName}.api.service.$!{tbb.className}Service;
 import $!{gb.packageName}.impl.model.$!{tbb.className}${PO};
@@ -46,6 +45,19 @@ public class $!{tbb.className}ServiceImpl extends STBaseServiceImpl<$!{tbb.class
 	@Autowired
 	private $!{tbb.className}Mapper tableMapper;
 #end
+	
+	@Override
+	protected $!{tbb.className}${PO} createModelInstance() {
+		return new $!{tbb.className}${PO}();
+	}
+
+	@Override
+	protected void setVOIdFromPO($!{tbb.className}${VO} vo, $!{tbb.className}${PO} po) {
+#foreach($cb in $tbb.pkcol)
+		vo.set$!{cb.methodName}(po.get$!{cb.methodName}());
+#end
+		
+	}
 	
 ##定制产生select方法。
 #if($conf.selectMap.size()>0)
