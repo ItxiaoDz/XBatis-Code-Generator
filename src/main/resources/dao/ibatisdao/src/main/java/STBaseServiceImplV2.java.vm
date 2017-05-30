@@ -55,7 +55,7 @@ import com.stframework.core.common.api.util.BeanUtils;
 		return count;
 	}
 	
-	@Override
+/*	@Override
 	public int batchInsert(List<V> list) {
 		List<T> modelList = new ArrayList<T>();
 		for (V vo: list) {
@@ -65,7 +65,7 @@ import com.stframework.core.common.api.util.BeanUtils;
 		}
 		return baseMapper.batchInsert(modelList);
 	}
-
+*/
 	
 	public int deleteByPrimaryKey(P id) {
 		return baseMapper.deleteByPrimaryKey(id);

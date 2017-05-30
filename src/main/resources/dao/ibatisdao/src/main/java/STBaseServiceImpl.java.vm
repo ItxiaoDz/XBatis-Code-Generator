@@ -73,11 +73,11 @@ import $!{gb.rootPackageName}.core.common.api.base.STBaseMapper;
 	}
 	
 	
-	@Override
+/*	@Override
 	public int batchUpdate(List<T> list){
 		return baseMapper.batchUpdate(list);
 	}
-
+*/
 
 	@Override
 	public V selectByPrimaryKey(P id) {

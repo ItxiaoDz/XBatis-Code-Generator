@@ -37,7 +37,7 @@ import com.github.pagehelper.PageInfo;
 	/**
 	 * 批量新增
 	 */
-	int batchUpdate(List<V> list);
+	//int batchUpdate(List<V> list);
 	
 	/**
 	 * 根据id删除
