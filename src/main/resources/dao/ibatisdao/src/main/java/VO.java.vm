@@ -58,7 +58,7 @@ public class $!{tbb.className}${VO} extends #if($!{tbb.isMultiPk})$!{tbb.classNa
 	/**
      * $!{cb.colComment}
      */
-    @ApiModelProperty(value = "$!{cb.propertyName}")
+    @ApiModelProperty(value = "$!{cb.colComment}")
     private $!{cb.propertyType} $!{cb.propertyName};
 #end 
 #end
@@ -67,7 +67,7 @@ public class $!{tbb.className}${VO} extends #if($!{tbb.isMultiPk})$!{tbb.classNa
 	/**
      * $!{cb.colComment}
      */
-    @ApiModelProperty(value = "$!{cb.propertyName}")
+    @ApiModelProperty(value = "$!{cb.colComment}")
     private $!{cb.propertyType} $!{cb.propertyName};
 #end
 

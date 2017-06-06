@@ -50,7 +50,7 @@ import com.stframework.core.common.api.util.BeanUtils;
 	public int insertSelective(V record) {
 		T model = createModelInstance();
 		BeanUtils.copyProperties(record, model);
-		int count = baseMapper.insert(model);
+		int count = baseMapper.insertSelective(model);
 		setVOIdFromPO(record, model);
 		return count;
 	}

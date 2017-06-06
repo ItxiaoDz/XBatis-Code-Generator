@@ -30,7 +30,7 @@ public class TableBean {
         this.conf = conf;
 		this.tableName = tableName;
         if (this.conf.getTablePrefix() != null && !this.conf.getTablePrefix().equals("")) {
-            this.className = getClassName(this.tableName.replace(this.conf.getTablePrefix(), ""));
+            this.className = getClassName(this.tableName.replaceFirst(this.conf.getTablePrefix(), ""));
         } else {
             this.className = getClassName(this.tableName);
         }

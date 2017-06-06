@@ -272,10 +272,10 @@
 #foreach($cb in $tbb.colList)
 #if($!{cb.colName}==${conf.addField} ||$!{cb.colName}==${conf.updField})
             <if test="$!cb.propertyName != null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") and $!cb.propertyName != '' #end ">
-                    #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}},
+                    #{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}}
             </if >
             <if test="$!cb.propertyName == null #if($!{cb.jdbcType}!="BIT" && $!{cb.jdbcType}!="TINYINT" && $!{cb.jdbcType}!="SMALLINT" && $!{cb.jdbcType}!="INTEGER" && $!{cb.jdbcType}!="BIGINT" && $!{cb.jdbcType}!="REAL" && $!{cb.jdbcType}!="DOUBLE" && $!{cb.jdbcType}!="NUMERIC" && $!{cb.jdbcType}!="FLOAT" && $!{cb.jdbcType}!="DECIMAL"  && $!{cb.jdbcType}!="CLOB") or $!cb.propertyName == '' #end ">
-                    unix_timestamp(now())*1000,
+                    unix_timestamp(now())*1000
             </if >#if(!$foreach.last), #end
 #else
 			#{$!{cb.propertyName.trim()},jdbcType=$!{cb.jdbcType}}#if(!$foreach.last), #end

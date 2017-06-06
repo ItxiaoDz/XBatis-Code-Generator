@@ -64,8 +64,12 @@ public class Gen {
 //    			.addQueryMethodAndCol("getByareaId", new String[]{"areaid"}, false));
 //    	tconfig.put("t_classes", TableConfig.build("t_classes").setTablePrefix("t_"));
 //    	tconfig.put("t_class_student", TableConfig.build("t_class_student").setTablePrefix("t_"));
-    	tconfig.put("t_course", TableConfig.build("t_course").setTablePrefix("t_"));
-    	tconfig.put("t_course_sku", TableConfig.build("t_course_sku").setTablePrefix("t_"));
+//    	tconfig.put("t_course", TableConfig.build("t_course").setTablePrefix("t_"));
+//    	tconfig.put("t_course_sku", TableConfig.build("t_course_sku").setTablePrefix("t_"));
+    	tconfig.put("t_student", TableConfig.build("t_student").setTablePrefix("t_"));
+//    	tconfig.put("t_stu_intenttime", TableConfig.build("t_stu_intenttime").setTablePrefix("t_"));
+//    	tconfig.put("t_stu_follow_record", TableConfig.build("t_stu_follow_record").setTablePrefix("t_"));
+//    	tconfig.put("t_stu_consult_course", TableConfig.build("t_stu_consult_course").setTablePrefix("t_"));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })

@@ -57,7 +57,7 @@ public class $!{tbb.className}Key${VO} extends BaseVO {
 	/**
      * $!{cb.colComment}
      */
-    @ApiModelProperty(value = "$!{cb.propertyName}")
+    @ApiModelProperty(value = "$!{cb.colComment}")
     private $!{cb.propertyType} $!{cb.propertyName};
 #end
 
