@@ -114,7 +114,7 @@ public class TableConfig {
 			this.wheres = wheres;
 		}
 
-		public boolean isListResult() {
+		public boolean getIsListResult() {
 			return isListResult;
 		}
 
