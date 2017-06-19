@@ -132,13 +132,13 @@
     <sql id="selectOrder">
    		<foreach item="item" index="index" collection="orderFields" open=" order by "
 			separator=",">
-			#{item.fieldName} #{item.order} 
+			${item.fieldName} ${item.order} 
 		</foreach>
     </sql>
     <sql id="selectOrderWithTableName">
    		<foreach item="item" index="index" collection="orderFields" open=" order by "
 			separator=",">
-			_$!{tbb.objectName}.#{item.fieldName} #{item.order} 
+			_$!{tbb.objectName}.${item.fieldName} ${item.order} 
 		</foreach>
     </sql>
 

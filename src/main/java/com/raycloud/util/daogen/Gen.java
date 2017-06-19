@@ -70,9 +70,14 @@ public class Gen {
 //    	tconfig.put("t_stu_intenttime", TableConfig.build("t_stu_intenttime").setTablePrefix("t_"));
 //    	tconfig.put("t_stu_follow_record", TableConfig.build("t_stu_follow_record").setTablePrefix("t_"));
 //    	tconfig.put("t_stu_consult_course", TableConfig.build("t_stu_consult_course").setTablePrefix("t_"));
-    	tconfig.put("t_trade", TableConfig.build("t_trade").setTablePrefix("t_"));
-    	tconfig.put("t_order", TableConfig.build("t_order").setTablePrefix("t_")
-    			.addQueryMethodAndCol("listByTid", new String[]{"tid"}, true));
+//    	tconfig.put("t_trade", TableConfig.build("t_trade").setTablePrefix("t_"));
+//    	tconfig.put("t_order", TableConfig.build("t_order").setTablePrefix("t_")
+//    			.addQueryMethodAndCol("listByTid", new String[]{"tid"}, true));
+//    	tconfig.put("t_refund_record", TableConfig.build("t_refund_record").setTablePrefix("t_"));
+    	tconfig.put("t_class_schedule", TableConfig.build("t_class_schedule").setTablePrefix("t_"));
+    	tconfig.put("t_schedule_student", TableConfig.build("t_schedule_student").setTablePrefix("t_"));
+    	tconfig.put("t_class_signin", TableConfig.build("t_class_signin").setTablePrefix("t_"));
+    	
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })
