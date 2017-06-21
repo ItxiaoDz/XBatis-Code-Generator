@@ -8,7 +8,6 @@ package $!{gb.rootPackageName}.core.common.api.base;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 /**
  * <br>类描述:分页查询基础查询条件类
@@ -16,7 +15,6 @@ import lombok.Data;
  *
  * @author $!{gb.userName}
  */
-@Data
 @ApiModel
 public class STBaseQuery implements Serializable {
 	private static final long serialVersionUID = -7018086326848324004L;
@@ -24,13 +22,13 @@ public class STBaseQuery implements Serializable {
 	public final static int DEFAULT_PAGE_SIZE = 10;
     public final static int DEFAULT_PAGE_NUM = 1;
     private Integer rownum_;
-    @ApiModelProperty(value = "page")
+    @ApiModelProperty(value = "当前页")
 	protected Integer page = DEFAULT_PAGE_NUM;
-	@ApiModelProperty(value = "pageSize")
+	@ApiModelProperty(value = "每页记录数")
 	protected Integer pageSize = DEFAULT_PAGE_SIZE;
-	@ApiModelProperty(value = "startRow")
+	@ApiModelProperty(value = "起始行")
 	protected Integer startRow;//起始行
-	@ApiModelProperty(value = "endRow")
+	@ApiModelProperty(value = "结束行(闭合)")
 	protected Integer endRow;//结束行(闭合)
 	@ApiModelProperty(value = "sort")
 	private String sort;
@@ -39,28 +37,59 @@ public class STBaseQuery implements Serializable {
 	private Integer totalCount;
     private Integer totalPage;
     
-	public STBaseQuery setStartRow(Integer startRow) {
+    public Integer getStartRow() {
+    	return this.startRow;
+    }
+    public void setStartRow(Integer startRow) {
+		this.startRow = startRow;
+	}
+	public STBaseQuery setParamStartRow(Integer startRow) {
 		this.startRow = startRow;
 		return this;
 	}
 	
-	public STBaseQuery setEndRow(Integer endRow) {
+	public Integer getEndRow() {
+		return this.endRow;
+	}
+	public void setEndRow(Integer endRow) {
+		this.endRow = endRow;
+	}
+	public STBaseQuery setParamEndRow(Integer endRow) {
 		this.endRow = endRow;
 		return this;
 	}
-	public STBaseQuery setPage(Integer page) {
-        if(page < 0) page = DEFAULT_PAGE_NUM;
+	
+	public Integer getPage() {
+		return this.page;
+	}
+	private void helpToSetPage(Integer page) {
+		if(page < 0) page = DEFAULT_PAGE_NUM;
 		this.page = page;
 		this.startRow = (page-1) * this.pageSize;
 		this.endRow = this.startRow + this.pageSize - 1;
+	}
+	public void setPage(Integer page) {
+        helpToSetPage(page);
+	}
+	public STBaseQuery setParamPage(Integer page) {
+        helpToSetPage(page);
 		return this;
 	}
 	
-	public STBaseQuery setPageSize(Integer pageSize) {
-        if( pageSize < 1) pageSize = 1;
+	public Integer getPageSize() {
+		return this.pageSize;
+	}
+	private void helpToSetPageSize(Integer pageSize) {
+		if( pageSize < 1) pageSize = 1;
         this.pageSize = pageSize;
         this.startRow = (page-1)*this.pageSize;
         this.endRow= this.startRow + this.pageSize - 1;
+	}
+	public void setPageSize(Integer pageSize) {
+        helpToSetPageSize(pageSize);
+	}
+	public STBaseQuery setParamPageSize(Integer pageSize) {
+        helpToSetPageSize(pageSize);
         return this;
 	}
 

@@ -54,7 +54,10 @@ public class $!{tbb.className}Query extends STBaseQuery {
 	public $!{cb.propertyType} get$!{cb.methodName} () {
     	return $!{cb.propertyName};
    	}
-    public $!{tbb.className}Query set$!{cb.methodName}($!{cb.propertyType} $!{cb.propertyName}) {
+   	public void set$!{cb.methodName}($!{cb.propertyType} $!{cb.propertyName}) {
+    	this.$!{cb.propertyName} = $!{cb.propertyName};
+    }
+    public $!{tbb.className}Query setParam$!{cb.methodName}($!{cb.propertyType} $!{cb.propertyName}) {
     	this.$!{cb.propertyName} = $!{cb.propertyName};
     	return this;
     }
@@ -65,7 +68,10 @@ public class $!{tbb.className}Query extends STBaseQuery {
     public $!{cb.propertyType} get$!{cb.methodName}Start () {
         return $!{cb.propertyName}Start;
     }
-    public $!{tbb.className}Query set$!{cb.methodName}Start($!{cb.propertyType} $!{cb.propertyName}) {
+    public void set$!{cb.methodName}Start($!{cb.propertyType} $!{cb.propertyName}) {
+        this.$!{cb.propertyName}Start = $!{cb.propertyName};
+    }
+    public $!{tbb.className}Query setParam$!{cb.methodName}Start($!{cb.propertyType} $!{cb.propertyName}) {
         this.$!{cb.propertyName}Start = $!{cb.propertyName};
         return this;
     }
@@ -75,7 +81,10 @@ public class $!{tbb.className}Query extends STBaseQuery {
     public $!{cb.propertyType} get$!{cb.methodName}End () {
         return $!{cb.propertyName}End;
     }
-    public $!{tbb.className}Query set$!{cb.methodName}End($!{cb.propertyType} $!{cb.propertyName}) {
+    public void set$!{cb.methodName}End($!{cb.propertyType} $!{cb.propertyName}) {
+        this.$!{cb.propertyName}End = $!{cb.propertyName};
+    }
+    public $!{tbb.className}Query setParam$!{cb.methodName}End($!{cb.propertyType} $!{cb.propertyName}) {
         this.$!{cb.propertyName}End = $!{cb.propertyName};
         return this;
     }
@@ -85,7 +94,10 @@ public class $!{tbb.className}Query extends STBaseQuery {
     public $!{cb.propertyType} get$!{cb.methodName}Equal () {
         return $!{cb.propertyName}Equal;
     }
-    public $!{tbb.className}Query set$!{cb.methodName}Equal($!{cb.propertyType} $!{cb.propertyName}) {
+    public void set$!{cb.methodName}Equal($!{cb.propertyType} $!{cb.propertyName}) {
+        this.$!{cb.propertyName}Equal = $!{cb.propertyName};
+    }
+    public $!{tbb.className}Query setParam$!{cb.methodName}Equal($!{cb.propertyType} $!{cb.propertyName}) {
         this.$!{cb.propertyName}Equal = $!{cb.propertyName};
         return this;
     }
