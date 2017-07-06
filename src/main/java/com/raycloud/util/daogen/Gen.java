@@ -74,8 +74,8 @@ public class Gen {
 //    	tconfig.put("t_order", TableConfig.build("t_order").setTablePrefix("t_")
 //    			.addQueryMethodAndCol("listByTid", new String[]{"tid"}, true));
 //    	tconfig.put("t_refund_record", TableConfig.build("t_refund_record").setTablePrefix("t_"));
-    	tconfig.put("t_class_schedule", TableConfig.build("t_class_schedule").setTablePrefix("t_"));
-    	tconfig.put("t_schedule_student", TableConfig.build("t_schedule_student").setTablePrefix("t_"));
+//    	tconfig.put("t_class_schedule", TableConfig.build("t_class_schedule").setTablePrefix("t_"));
+//    	tconfig.put("t_schedule_student", TableConfig.build("t_schedule_student").setTablePrefix("t_"));
     	tconfig.put("t_class_signin", TableConfig.build("t_class_signin").setTablePrefix("t_"));
     	
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
