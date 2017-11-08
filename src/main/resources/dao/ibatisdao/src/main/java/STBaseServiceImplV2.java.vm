@@ -37,9 +37,15 @@ import com.stframework.core.common.api.util.BeanUtils;
 	protected abstract T createModelInstance();
 	protected abstract void setVOIdFromPO(V vo, T po);
 	
-	public int insert(V record) {
+	protected T createPoFromVO(V vo) {
 		T model = createModelInstance();
-		BeanUtils.copyProperties(record, model);
+		BeanUtils.copyProperties(vo, model);
+		
+		return model;
+	}
+	
+	public int insert(V record) {
+		T model = createPoFromVO(record);
 		int count = baseMapper.insert(model);
 		setVOIdFromPO(record, model);
 		return count;
@@ -48,24 +54,22 @@ import com.stframework.core.common.api.util.BeanUtils;
 
 	
 	public int insertSelective(V record) {
-		T model = createModelInstance();
-		BeanUtils.copyProperties(record, model);
+		T model = createPoFromVO(record);
 		int count = baseMapper.insertSelective(model);
 		setVOIdFromPO(record, model);
 		return count;
 	}
 	
-/*	@Override
+	@Override
 	public int batchInsert(List<V> list) {
 		List<T> modelList = new ArrayList<T>();
 		for (V vo: list) {
-			T model = createModelInstance();
-			BeanUtils.copyProperties(vo, model);
+			T model = createPoFromVO(vo);
 			modelList.add(model);
 		}
 		return baseMapper.batchInsert(modelList);
 	}
-*/
+	
 	
 	public int deleteByPrimaryKey(P id) {
 		return baseMapper.deleteByPrimaryKey(id);
@@ -81,31 +85,28 @@ import com.stframework.core.common.api.util.BeanUtils;
 	
 	@Override
 	public int updateByPrimaryKey(V record) {
-		T model = createModelInstance();
-		BeanUtils.copyProperties(record, model);
+		T model = createPoFromVO(record);
 		return baseMapper.updateByPrimaryKey(model);
 	}
 	
 	
 	@Override
 	public int updateByPrimaryKeySelective(V record) {
-		T model = createModelInstance();
-		BeanUtils.copyProperties(record, model);
+		T model = createPoFromVO(record);
 		return baseMapper.updateByPrimaryKeySelective(model);
 	}
 	
-	
+	/*
 	@Override
 	public int batchUpdate(List<V> list){
 		List<T> modelList = new ArrayList<T>();
 		for (V vo: list) {
-			T model = createModelInstance();
-			BeanUtils.copyProperties(vo, model);
+			T model = createPoFromVO(vo);
 			modelList.add(model);
 		}
 		return baseMapper.batchUpdate(modelList);
 	}
-
+	*/
 
 	@Override
 	public V selectByPrimaryKey(P id) {
