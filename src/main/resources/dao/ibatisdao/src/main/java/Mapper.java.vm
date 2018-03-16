@@ -18,6 +18,7 @@ import $!{gb.packageName}.api.domain.vo.$!{tbb.className}${VO};
 import $!{gb.packageName}.api.domain.vo.$!{tbb.className}Key${VO};
 #end
 #if($conf.selectMap.size()>0)
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 #end
 
@@ -34,7 +35,7 @@ import java.util.List;
 #if($conf.selectMap.size()>0)
 #foreach($sel in $conf.selectMap.keySet())
 #if( $conf.selectMap.get($sel) && $conf.selectMap.get($sel).wheres.size()>0)
-   public #if( $conf.selectMap.get($sel).isListResult)List<$!{tbb.className}${VO}>#else $!{tbb.className}${VO} #end $sel(#foreach($w in $conf.selectMap.get($sel).wheres)#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end ${tbb.colMap.get($w).propertyType} ${tbb.colMap.get($w).propertyName} #end #end);
+   public #if( $conf.selectMap.get($sel).isListResult)List<$!{tbb.className}${VO}>#else $!{tbb.className}${VO} #end $sel(#foreach($w in $conf.selectMap.get($sel).wheres)#if($!{tbb.colMap.get($w)})#if(!$foreach.first), #end @Param("${tbb.colMap.get($w).propertyName}")${tbb.colMap.get($w).propertyType} ${tbb.colMap.get($w).propertyName} #end #end);
 #end
 #end
 #end
