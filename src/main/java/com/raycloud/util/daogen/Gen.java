@@ -64,7 +64,7 @@ public class Gen {
 //    			.addQueryMethodAndCol("getByareaId", new String[]{"areaid"}, false));
 //    	tconfig.put("t_classes", TableConfig.build("t_classes").setTablePrefix("t_"));
 //    	tconfig.put("t_class_student", TableConfig.build("t_class_student").setTablePrefix("t_"));
-//    	tconfig.put("t_course", TableConfig.build("t_course").setTablePrefix("t_"));
+    	tconfig.put("t_course", TableConfig.build("t_course").setTablePrefix("t_").setIgnoredCols("unit_price"));
 //    	tconfig.put("t_course_sku", TableConfig.build("t_course_sku").setTablePrefix("t_"));
 //      tconfig.put("t_student", TableConfig.build("t_student").setTablePrefix("t_"));
 //    	tconfig.put("t_stu_intenttime", TableConfig.build("t_stu_intenttime").setTablePrefix("t_"));
@@ -73,6 +73,7 @@ public class Gen {
 //    	tconfig.put("t_trade", TableConfig.build("t_trade").setTablePrefix("t_"));
 //    	tconfig.put("t_order", TableConfig.build("t_order").setTablePrefix("t_")
 //    			.addQueryMethodAndCol("listByTid", new String[]{"tid"}, true));
+//    	tconfig.put("t_order_coursesnap", TableConfig.build("t_order_coursesnap").setTablePrefix("t_"));
 //    	tconfig.put("t_refund_record", TableConfig.build("t_refund_record").setTablePrefix("t_"));
 //    	tconfig.put("t_class_schedule", TableConfig.build("t_class_schedule").setTablePrefix("t_"));
 //    	tconfig.put("t_schedule_student", TableConfig.build("t_schedule_student").setTablePrefix("t_"));
@@ -85,10 +86,20 @@ public class Gen {
 //    	tconfig.put("t_sys_message", TableConfig.build("t_sys_message").setTablePrefix("t_sys_")
 //    			.addQueryMethodAndCol("listUserMessages", new String[]{"to_uid"}, true)
 //    			.addQueryMethodAndCol("listBySerialNum", new String[]{"bizz_serial_num"}, true));
-      tconfig.put("t_sys_account", TableConfig.build("t_sys_account").setTablePrefix("t_sys_")
-    		  .addQueryMethodAndCol("getByAccount", new String[]{"account", "account_type"}, false)
-    		  .addQueryMethodAndCol("getAccountByUser", new String[]{"user_id", "account_type"}, false)
-    		  .addQueryMethodAndCol("listUserAccounts", new String[]{"user_id"}, true));
+//      tconfig.put("t_sys_account", TableConfig.build("t_sys_account").setTablePrefix("t_sys_")
+//    		  .addQueryMethodAndCol("getByAccount", new String[]{"account", "account_type"}, false)
+//    		  .addQueryMethodAndCol("getAccountByUser", new String[]{"user_id", "account_type"}, false)
+//    		  .addQueryMethodAndCol("listUserAccounts", new String[]{"user_id"}, true));
+//      	tconfig.put("t_free_expe_activity", TableConfig.build("t_free_expe_activity").setTablePrefix("t_"));
+//	    tconfig.put("t_activity_coursesnap", TableConfig.build("t_activity_coursesnap").setTablePrefix("t_")
+//		  .addQueryMethodAndCol("getByActIdAndType", new String[]{"act_id", "act_type"}, false));
+//	    tconfig.put("t_free_expe_act_participation", TableConfig.build("t_free_expe_act_participation").setTablePrefix("t_"));
+//	    tconfig.put("t_free_expe_likes", TableConfig.build("t_free_expe_likes").setTablePrefix("t_"));
+//	    tconfig.put("t_activity_msg_task", TableConfig.build("t_free_expe_likes").setTablePrefix("t_"));
+//    	tconfig.put("t_institution_likes", TableConfig.build("t_institution_likes").setTablePrefix("t_")
+//    			  .addQueryMethodAndCol("getByInstIdAndUserId", new String[]{"inst_id", "user_id"}, false));
+//    	tconfig.put("t_marketing_notice_readrecord", TableConfig.build("t_marketing_notice_readrecord").setTablePrefix("t_")
+//    			  .addQueryMethodAndCol("getByNoticeIdAndUserId", new String[]{"notice_id", "user_id"}, false));
         /**新增分表模式、符合主键、自定义add_time、upd_time、去除数据库前缀**/
 //        tconfig.put("tb_trade", TableConfig.build("tb_trade").setCustomField(false));
 //        //.setSplitTable(true).addQueryMethodAndCol("getTradeListByShopId", new String[] { "shop_id","buyer_nick" })

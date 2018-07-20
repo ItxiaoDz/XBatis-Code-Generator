@@ -70,6 +70,8 @@ public class TableConfig {
 
     //queryPage
     private List<String> orderCol = new ArrayList<String>();
+    
+    private List<String> ignoredCols = new ArrayList<String>();
 
     private TableConfig() {
     }
@@ -300,5 +302,18 @@ public class TableConfig {
 
 	public void setAutoIncrsId(boolean autoIncrsId) {
 		this.autoIncrsId = autoIncrsId;
+	}
+
+	public List<String> getIgnoredCols() {
+		return ignoredCols;
+	}
+
+	public void setIgnoredCols(List<String> ignoredCols) {
+		this.ignoredCols = ignoredCols;
+	}
+	
+	public TableConfig setIgnoredCols(String... cols) {
+		this.ignoredCols = Arrays.asList(cols);
+		return this;
 	}
 }

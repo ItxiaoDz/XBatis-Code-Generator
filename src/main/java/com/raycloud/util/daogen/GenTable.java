@@ -210,9 +210,8 @@ public class GenTable {
      */
     private List<String> keySequence(Map<Integer, String> keyIndexMap) {
         List<Integer> index = new ArrayList<Integer>(keyIndexMap.keySet());
-        Collections.sort(index, new Comparator() {
-            @Override
-            public int compare(Object arg0, Object arg1) {
+        Collections.sort(index, new Comparator<Integer>() {
+            public int compare(Integer arg0, Integer arg1) {
                 int muti0 = (Integer) arg0;
                 int muti1 = (Integer) arg1;
                 if (muti0 < muti1) {
@@ -275,6 +274,12 @@ public class GenTable {
                 	tableBean.setIsAutoIncrsId(true);
                 }
                 
+                if (tableBean.getConf() != null
+                		&& tableBean.getConf().getIgnoredCols().size() > 0
+                		&& tableBean.getConf().getIgnoredCols().contains(cb.getColName())) {
+                	// 如果是忽略的字段，则不生成代码
+                	continue;
+                }
                 tableBean.addColBean(cb);
 			}
             /**根据主键列名获取列对象**/
