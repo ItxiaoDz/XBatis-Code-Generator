@@ -7,6 +7,7 @@
 ##$!{tbb.objectName}对象名，如：userInfo
 #set($PO = $!{gb.objSuffix})
 #set($VO = $!{gb.voSuffix})
+#set($conf=$!{tbb.conf})
 
 package $!{gb.packageName}.impl.mapper;
 
